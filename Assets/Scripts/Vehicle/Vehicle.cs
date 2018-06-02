@@ -5,8 +5,8 @@ namespace MotherJunkers
     [RequireComponent(typeof(VehicleMovement))]
     public class Vehicle : MonoBehaviour
     {
-        [SerializeField]
-        EController _controller;
+        
+        public EController _controller;
 
         VehicleMovement _movement;
 
