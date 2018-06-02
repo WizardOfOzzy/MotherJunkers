@@ -12,6 +12,9 @@ public class WeaponController : MonoBehaviour
     private const int MAX_WEAPONS = 2;
 
     [SerializeField]
+    private GameObject _machineGunPrefab;
+
+    [SerializeField]
     [Range(0, MAX_WEAPONS - 1)]
     private int _activeWeaponIdx;
 
@@ -112,8 +115,7 @@ public class WeaponController : MonoBehaviour
 
     private void InitMachineGun()
     {
-        GameObject machineGunGO = WeaponFactory.Instance.GetMachineGun();
-        _weapons[0] = Instantiate(machineGunGO).GetComponent<Weapon>();
+        _weapons[0] = Instantiate(_machineGunPrefab).GetComponent<Weapon>();
         ParentWeaponGameObject(_weapons[0].gameObject);
         EnableWeapon(0);
     }
@@ -121,6 +123,7 @@ public class WeaponController : MonoBehaviour
     private void ParentWeaponGameObject(GameObject go)
     {
         go.transform.parent = _weaponAttach;
+        go.transform.localPosition = Vector3.zero;
     }
 
     private void DestroyWeapon(Weapon weapon)

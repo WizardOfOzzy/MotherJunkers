@@ -7,21 +7,12 @@ public class VFX : MonoBehaviour {
     public float duration = -1;
 	// Use this for initialization
 	void Start () {
-        
+        Init();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Play();
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Stop();
-
-        }
     }
         public void Play(float duration = -1)
     {

@@ -15,32 +15,24 @@ public class Weapon : Item
     private float MaxAmmo;
 
     [SerializeField]
-    private float AmmoPerShot;
+    protected float AmmoPerShot;
 
     [SerializeField]
-    private float ShotsPerSecond;
+    protected float ShotsPerSecond;
 
     public bool HasInfiniteAmmo;
 
     [SerializeField]
     private GameObject ProjectilePrefab;
 
+    [SerializeField]
+    protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
     public bool TryFireWeapon()
     {
         bool didFire = false;
 
-        // Check to see if we have enough ammo to fire
-        if (HasInfiniteAmmo)
-        {
-            didFire = true;
-        }
-        else if (CurrentAmmo > MIN_AMMO)
-        {
-            // Always allow 
-            CurrentAmmo = Mathf.Max(MIN_AMMO, CurrentAmmo - AmmoPerShot);
-            didFire = true;
-        }
+        didFire = CanFire();
 
         // Actually fire the weapon
         if (didFire)
@@ -51,14 +43,30 @@ public class Weapon : Item
         return didFire;
     }
 
-    private void FireWeapon()
+    protected virtual void FireWeapon()
     {
         // TODO - spawn projecticle prefab, have it do things
     }
-
-	private void Start()
+    protected virtual bool CanFire()
+    {
+        bool result = false;
+        // Check to see if we have enough ammo to fire
+        if (HasInfiniteAmmo)
+        {
+            result = true;
+        }
+        else if (CurrentAmmo > MIN_AMMO)
+        {
+            // Always allow 
+            CurrentAmmo = Mathf.Max(MIN_AMMO, CurrentAmmo - AmmoPerShot);
+            result = true;
+        }
+        return result;
+    }
+	protected virtual void Start()
 	{
         // Init
         CurrentAmmo = MaxAmmo;
+        spawnPoint = transform;
 	}
 }
