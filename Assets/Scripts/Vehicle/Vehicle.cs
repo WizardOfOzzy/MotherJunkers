@@ -10,9 +10,14 @@ namespace MotherJunkers
 
         VehicleMovement _movement;
 
-        private void Start()
+        void Start()
         {
             _movement = GetComponent<VehicleMovement>();
+        }
+
+        private void Update()
+        {
+            _movement.SetMovementDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftVertical)));
         }
     }
 }

@@ -34,6 +34,8 @@ public class VehicleMovement : MonoBehaviour {
 	/** Relative target to which we are attempting to move (Used for debugging) */
 	Vector3 _TargetDestination;
 
+    Vector2 _inputDirection;
+
 	/** Maximum distance for the target destination */
 	[SerializeField]
 	public float _MaxTargetDistance;
@@ -43,20 +45,17 @@ public class VehicleMovement : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
+    public void SetMovementDirection(Vector2 direction)
+    {
+        _inputDirection = direction;
+    }
 
-		// Track the current position
-		Vector3 OldPos = gameObject.transform.position;
-
-		// Get input
-		Vector3 targetDestination = new Vector3(Input.GetAxis("Horizontal") * _MaxTargetDistance,  0.0F, Input.GetAxis ("Vertical") * _MaxTargetDistance);
-		_TargetDestination = OldPos + targetDestination;
-		_TargetDestination.y = 0.0F;
-
-		UpdatePosition ();
-	}
+    private void FixedUpdate()
+    {
+        _TargetDestination.x = transform.position.x + _inputDirection.x;
+        _TargetDestination.y = transform.position.y + _inputDirection.y;
+        UpdatePosition();
+    }
 
 	Vector3 CalculateForce()
 	{
@@ -79,7 +78,7 @@ public class VehicleMovement : MonoBehaviour {
 		Vector3 Acceleration = SteeringForce / _Mass;
 
 		// Update velocity
-		_Velocity += Acceleration * Time.deltaTime;
+		_Velocity += Acceleration * Time.fixedDeltaTime;
 
 		// Truncate the velocity if it exceeds our maximum amount of force
 		if (_Velocity.sqrMagnitude > (_MaxForce * _MaxForce)) 
@@ -88,7 +87,7 @@ public class VehicleMovement : MonoBehaviour {
 		}
 
 		// Update the position
-		gameObject.transform.position += _Velocity * Time.deltaTime;
+		gameObject.transform.position += _Velocity * Time.fixedDeltaTime;
 	}
 
 	/**
