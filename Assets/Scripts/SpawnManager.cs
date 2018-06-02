@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
@@ -18,14 +19,17 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    public int spawnCount = 20;
+    public float interval = 10000f;
+    bool ready = false;
+    
     void Start()
     {
+        InvokeRepeating("SpawnWeapon", 1f, 10f); ;
+    }
+
+    void SpawnWeapon() {
         Spawn(PickupType.weapon);
-        Spawn(PickupType.boost);
-        Spawn(PickupType.powerup);
-        Spawn(PickupType.weapon);
-        Spawn(PickupType.boost);
-        Spawn(PickupType.powerup);
     }
 
 	// Update is called once per frame
@@ -111,7 +115,7 @@ public class SpawnManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("No spawn positions found!!");
+            UnityEngine.Debug.Log("No spawn positions found!!");
         }
 
         return availableLocation;
