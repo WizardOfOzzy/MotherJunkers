@@ -15,7 +15,7 @@ public class StandardMachineGun : Weapon {
     protected override void FireWeapon()
     {
         //base.FireWeapon();
-        MachineGunPool.Instance.SpawnProjectile(transform.position + Random.onUnitSphere * offset, transform.rotation);
+        MachineGunPool.Instance.SpawnProjectile(spawnPoint.position + Random.onUnitSphere * offset, spawnPoint.rotation);
     }
     protected override bool CanFire()
     {
@@ -27,10 +27,10 @@ public class StandardMachineGun : Weapon {
     {
         if (fireTrack > 0)
             fireTrack -= Time.deltaTime;
-        
+        /*
         if (Input.GetKey(KeyCode.Space))
         {
             TryFireWeapon();
-        }
+        }*/
     }
 }
