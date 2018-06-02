@@ -12,9 +12,17 @@ public class WeaponFactory : MonoBehaviour
         }
     }
     private WeaponFactory _instance;
+
+    [SerializeField]
+    private GameObject _machineGunPrefab;
+
     [SerializeField]
     private GameObject[] _weaponPrefabs;
 
+    public GameObject GetMachineGun()
+    {
+        return _machineGunPrefab;
+    }
 
     public GameObject GetRandomWeapon()
     {

@@ -56,3 +56,5 @@ MonoBehaviour:
   - {fileID: 1186282287595964, guid: 933ee6341980b4d12b64cc07a893480c, type: 2}
   - {fileID: 1951487203455146, guid: d14f1b1392443435694a5350f64932f7, type: 2}
   - {fileID: 1794219285226902, guid: dea11cfb4e52c46f8a2255774ed8315b, type: 2}
+  _machineGunPrefab: {fileID: 1772494627662246, guid: 24ca9a7f46d4f452d9927342b22612cc,
+    type: 2}
