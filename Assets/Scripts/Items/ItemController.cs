@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ItemController : MonoBehaviour 
-{
-    private void OnTriggerEnter(Collider other)
-    {
-        Pickup pickup = other.GetComponent<Pickup>();
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-        if (pickup != null)
+public class ItemController : MonoBehaviour 
+{
+	private void OnTriggerEnter(Collider other)
+	{
+        Item item = other.GetComponentInChildren<Item>();
+
+        if (item != null)
         {
-            Item item = pickup.GetItem().GetComponent<Item>();
             AddPickup(item);
-            pickup.Cleanup();
         }
-    }
+	}
 
 	private void AddPickup(Item item)
     {

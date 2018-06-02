@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WeaponFactory : MonoBehaviour 
 {
-    public static WeaponFactory Instance
+    public WeaponFactory Instance
     {
         get
         {
             return _instance;
         }
     }
-    private static WeaponFactory _instance;
+    private WeaponFactory _instance;
 
     [SerializeField]
     private GameObject _machineGunPrefab;

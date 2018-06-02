@@ -23,13 +23,9 @@ public class VehicleMovement : MonoBehaviour {
 	[SerializeField]
 	public float _MaxTurnRate;
 
-	/** Amount of braking to apply to the desired velocity */
+	/** Rate at which the vehicle decelerates without input (0 - 1) */
 	[SerializeField]
-	public float _Brake;
-
-	/** Amount of boost to apply to the vehicle */
-	[SerializeField]
-	public float _BoostMultiplier;
+	public float _Deceleration;
 
 	/** Relative target to which we are attempting to move (Used for debugging) */
 	Vector3 _TargetDestination;
