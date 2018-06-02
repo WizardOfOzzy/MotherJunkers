@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114502157812515880}
   - component: {fileID: 114549464056083408}
   - component: {fileID: 54132191147517768}
+  - component: {fileID: 114929975109073674}
+  - component: {fileID: 114826818010807548}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -191,6 +193,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: 1
+--- !u!114 &114826818010807548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029934502974978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfd69ba3185a43778358ac890a7df94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114929975109073674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029934502974978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e715f19d2d1842e5883ef3e89357c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponAttach: {fileID: 4350181924039630}
+  _machineGunPrefab: {fileID: 1772494627662246, guid: 24ca9a7f46d4f452d9927342b22612cc,
+    type: 2}
+  _activeWeaponIdx: 0
 --- !u!137 &137695942760499910
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
