@@ -15,10 +15,10 @@ public class Weapon : Item
     private float MaxAmmo;
 
     [SerializeField]
-    private float AmmoPerShot;
+    protected float AmmoPerShot;
 
     [SerializeField]
-    private float ShotsPerSecond;
+    protected float ShotsPerSecond;
 
     public bool HasInfiniteAmmo;
 

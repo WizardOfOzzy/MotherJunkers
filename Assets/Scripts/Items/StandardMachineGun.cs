@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StandardMachineGun : Weapon {
-    public float roundsPerSecond = 10;
+    float fireRate;
     float fireTrack;
     float offset = .5f;
     protected override void Start()
     {
         base.Start();
-        roundsPerSecond = 1 / roundsPerSecond;
-        fireTrack = roundsPerSecond;
+        fireRate = 1 / ShotsPerSecond ;
+        fireTrack = fireRate;
     }
     protected override void FireWeapon()
     {
@@ -27,10 +27,10 @@ public class StandardMachineGun : Weapon {
     {
         if (fireTrack > 0)
             fireTrack -= Time.deltaTime;
-        /*
+        
         if (Input.GetKey(KeyCode.Space))
         {
             TryFireWeapon();
-        }*/
+        }
     }
 }
