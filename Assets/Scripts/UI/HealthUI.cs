@@ -51,8 +51,13 @@ public class HealthUI : MonoBehaviour
 
     private void Shake()
     {
-        Health.transform.DOShakePosition(ShakeDuration, ShakeStrength, Vibration, 90, false, true);
+        Vector3 position = Health.transform.localPosition;
+        Health.transform.DOShakePosition(ShakeDuration, ShakeStrength, Vibration, 90, false, true).OnComplete(()=>
+            {
+                Health.transform.localPosition = position;
+            });
     }
+   
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.A))
