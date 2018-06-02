@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VehicleMovement : MonoBehaviour {
+public class VehicleMovement : MonoBehaviour
+{
 
-	/** Mass of the vehicle */
+    Rigidbody _RigidBody;
+    Camera _Camera;
+
+    	/** Mass of the vehicle */
 	[SerializeField]
 	public float _Mass;
 
@@ -40,24 +44,25 @@ public class VehicleMovement : MonoBehaviour {
 	[SerializeField]
 	public float _MaxTargetDistance;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-    public void SetMovementDirection(Vector2 direction)
+    [SerializeField]
+    float _ForceMultiplier;
+
+    [SerializeField]
+    float _MaxVelocity;
+
+    // Use this for initialization
+    void Start()
+    {
+        _RigidBody = GetComponent<Rigidbody>();
+        _Camera = GameObject.FindObjectOfType<Camera>();
+    }
+
+     public void SetMovementDirection(Vector2 direction)
     {
         _inputDirection = direction;
     }
 
-    private void FixedUpdate()
-    {
-        _TargetDestination.x = transform.position.x + _inputDirection.x;
-        _TargetDestination.y = transform.position.y + _inputDirection.y;
-        UpdatePosition();
-    }
-
-	Vector3 CalculateForce()
+    Vector3 CalculateForce()
 	{
 		Vector3 DesiredVelocity = (_TargetDestination - transform.position);
 		DesiredVelocity.Normalize ();
@@ -66,37 +71,23 @@ public class VehicleMovement : MonoBehaviour {
 		return (DesiredVelocity - _Velocity);
 	}
 
-	/**
-	 *  Position update
-	 */
-	void UpdatePosition()
-	{
-		// Calculate the desired steering force
-		Vector3 SteeringForce = CalculateForce ();
+    private void FixedUpdate()
+    {    
+        // Apply horizontal force
+        ApplyForce(_Camera.transform.right * _inputDirection.x, _ForceMultiplier);
 
-		// Acceleration = force / mass
-		Vector3 Acceleration = SteeringForce / _Mass;
+        // Apply vertical force
+        ApplyForce(_Camera.transform.up * transform.position.y, _ForceMultiplier);
 
-		// Update velocity
-		_Velocity += Acceleration * Time.fixedDeltaTime;
+        // Truncate velocity
+        if (_RigidBody.velocity.magnitude > _MaxVelocity)
+        {
+            _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity;
+        }
+    }
 
-		// Truncate the velocity if it exceeds our maximum amount of force
-		if (_Velocity.sqrMagnitude > (_MaxForce * _MaxForce)) 
-		{
-			_Velocity = _Velocity.normalized * _MaxForce;
-		}
-
-		// Update the position
-		gameObject.transform.position += _Velocity * Time.fixedDeltaTime;
-	}
-
-	/**
-	 *  Orientation update
-	 */
-	void UpdateOrientation()
-	{
-		// Stubbed in to not rotate for now
-		Quaternion OldOrientation = gameObject.transform.rotation;
-		Quaternion NewOrientaiton = OldOrientation;	
-	}
+    void ApplyForce(Vector3 Direction, float force)
+    {
+        _RigidBody.AddForce(Direction * force * Time.deltaTime);
+    }
 }

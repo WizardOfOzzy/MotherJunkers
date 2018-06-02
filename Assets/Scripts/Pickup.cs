@@ -11,6 +11,8 @@ public class Pickup : MonoBehaviour
         {
             Cleanup();
         }
+
+        transform.Rotate(Vector3.up, _spinRate * Time.deltaTime);
     }
 
     public void Init(PickupType ptype, float setDuration,Location usedLocation)
@@ -46,4 +48,5 @@ public class Pickup : MonoBehaviour
     private float _duration;
     private Location _usedLocation;
     private Stopwatch _timer = new Stopwatch();
+    private const float _spinRate = 60f;
 }
