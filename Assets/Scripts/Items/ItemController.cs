@@ -5,14 +5,17 @@ using UnityEngine;
 public class ItemController : MonoBehaviour 
 
 {
+    [SerializeField]
     private WeaponController _weaponController;
 
     private void OnTriggerEnter(Collider other)
     {
+        
         Pickup pickup = other.GetComponent<Pickup>();
 
         if (pickup != null)
         {
+            
             Item item = pickup.GetItem().GetComponent<Item>();
             AddPickup(item);
             pickup.Cleanup();
