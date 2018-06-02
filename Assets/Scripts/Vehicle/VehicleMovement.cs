@@ -6,19 +6,23 @@ public class VehicleMovement : MonoBehaviour
 {
 
     Rigidbody _RigidBody;
-    Camera _Camera;
 
     [SerializeField]
-    float _ForceMultiplier;
+    float _ForceMultiplier = 10000.0F;
 
     [SerializeField]
-    float _MaxVelocity;
+    float _MaxVelocity = 100.0F;
+
+    [SerializeField]
+    float _TurningForce = 100.0F;
+
+    [SerializeField]
+    float _MaxAngularVelocity = 100.0F;
 
     // Use this for initialization
     void Start()
     {
         _RigidBody = GetComponent<Rigidbody>();
-        _Camera = GameObject.FindObjectOfType<Camera>();
     }
 
     // Update is called once per frame
@@ -32,16 +36,21 @@ public class VehicleMovement : MonoBehaviour
         Debug.Log("x : " + x);
         Debug.Log("y : " + y);
 
-        // Apply horizontal force
-        ApplyForce(_Camera.transform.right * x, _ForceMultiplier);
+        // Apply steering
+        ApplyTurningForce(transform.up * x, _TurningForce);
 
-        // Apply vertical force
-        ApplyForce(_Camera.transform.up * y, _ForceMultiplier);
+        // Apply forward movement
+        ApplyForce(transform.forward * y, _ForceMultiplier);
 
         // Truncate velocity
         if (_RigidBody.velocity.magnitude > _MaxVelocity)
         {
             _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity;
+        }
+
+        if(_RigidBody.angularVelocity.magnitude > _MaxAngularVelocity)
+        {
+            _RigidBody.angularVelocity = _RigidBody.angularVelocity.normalized * _MaxVelocity;
         }
     }
 
@@ -54,5 +63,10 @@ public class VehicleMovement : MonoBehaviour
     void ApplyForce(Vector3 Direction, float force)
     {
         _RigidBody.AddForce(Direction * force * Time.deltaTime);
+    }
+
+    void ApplyTurningForce(Vector3 Direction, float force)
+    {
+        _RigidBody.AddTorque(Direction * force * Time.deltaTime);
     }
 }
