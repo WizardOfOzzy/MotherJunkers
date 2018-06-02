@@ -18,6 +18,9 @@ public class WeaponController : MonoBehaviour
     [Range(0, MAX_WEAPONS - 1)]
     private int _activeWeaponIdx;
 
+    // TODO - get this from a separate component
+    public int _playerIndex = 0;
+
     public void AttachWeapon(Weapon weapon)
     {
         if (_specialWeapon != null)
@@ -41,19 +44,24 @@ public class WeaponController : MonoBehaviour
     {
         if (_specialWeapon != null)
         {
-            DestroyWeapon(_specialWeapon);
-        }
+            if (_activeWeaponIdx != 0)
+            {
+                _activeWeaponIdx = 0;
+                EnableWeapon(_activeWeaponIdx);
+            }
 
-        if (_activeWeaponIdx != 0)
-        {
-            _activeWeaponIdx = 0;
-            EnableWeapon(_activeWeaponIdx);
+            DestroyWeapon(_specialWeapon);
         }
     }
 
     public void FireWeapon()
     {
-        _activeWeapon.TryFireWeapon();
+        bool didFire = _activeWeapon.TryFireWeapon();
+        if (didFire)
+        {
+            WeaponFiredEvent evt = new WeaponFiredEvent(_playerIndex, _activeWeapon);
+            Publisher.Raise<WeaponFiredEvent>(evt);
+        }
     }
 
     public void SwapWeapons(bool next = true)
@@ -84,6 +92,8 @@ public class WeaponController : MonoBehaviour
     private void EnableWeapon(int weaponIdx)
     {
         _weapons[weaponIdx].gameObject.SetActive(true);
+        WeaponChangedEvent evt = new WeaponChangedEvent(_playerIndex, _activeWeapon);
+        Publisher.Raise<WeaponChangedEvent>(evt);
     }
 
     private void DisableWeapon(int weaponIdx)
