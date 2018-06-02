@@ -283,10 +283,11 @@ Animation:
   m_GameObject: {fileID: 1643249091958490}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 6a5a25c5c91ae8a40bcaa6c2028283f7, type: 2}
-  m_Animations: []
+  m_Animation: {fileID: 7400000, guid: 16d3e14dd1c40ec4397594865a50eefd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 16d3e14dd1c40ec4397594865a50eefd, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114028276740580632
@@ -300,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc74a52368cca448b3cd150026e3d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bDebugging: 1
+  bDebugging: 0
   ImpulseDirection: {x: 0, y: 0, z: -1}
   ImpulseAmount: 2000
   DamageAmount: 0
