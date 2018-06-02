@@ -19,6 +19,13 @@ public class Pickup : MonoBehaviour
         _duration = setDuration;
         _usedLocation = usedLocation;
 
+        if (ptype == PickupType.weapon)
+        {
+            GameObject weaponPrefab = Instantiate(WeaponFactory.Instance.GetRandomWeapon());
+            weaponPrefab.transform.SetParent(transform);
+            weaponPrefab.transform.localPosition = Vector3.zero;
+        }
+
         _timer = new Stopwatch();
         _timer.Start();
     }
