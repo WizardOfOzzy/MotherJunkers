@@ -12,11 +12,11 @@ public class Pickup : MonoBehaviour
 
     public void Apply()
     {
-
+        Debug.Log(_pickupType + " - " + _duration);
     }
 
     private PickupType _pickupType;
     private float _duration;
-    private Vector3 _spawnPosition;
-    private bool _consumed;
+    //private Vector3 _spawnPosition;
+    //private bool _consumed;
 }

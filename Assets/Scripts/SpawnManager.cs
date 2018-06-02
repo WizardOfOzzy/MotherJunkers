@@ -26,9 +26,6 @@ public class SpawnManager : MonoBehaviour {
         Spawn(PickupType.weapon);
         Spawn(PickupType.boost);
         Spawn(PickupType.powerup);
-        Spawn(PickupType.weapon);
-        Spawn(PickupType.boost);
-        Spawn(PickupType.powerup);
     }
 
 	// Update is called once per frame
@@ -78,13 +75,16 @@ public class SpawnManager : MonoBehaviour {
     {
         Vector3 availablePosition = Vector3.zero;
 
-        Location someLocation = locations.FindLast(s => s.available);
-
-        if (someLocation != new Location())
+        int someLocation = locations.FindLastIndex(s => s.available);
+        
+        if (someLocation != -1)
         {
-            Location foundLocation = someList[0];
+            Location foundLocation = locations[someLocation];
             availablePosition = foundLocation.actualObj.transform.localPosition;
             foundLocation.available = false;
+
+            locations.RemoveAt(someLocation);
+            locations.Add(foundLocation);
         }
         else
         {
