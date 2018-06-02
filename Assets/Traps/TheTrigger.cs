@@ -8,7 +8,7 @@ public class TheTrigger : MonoBehaviour {
 
     public int AmountOfTriggers = 10000;
 
-    bool bCanTrigger;
+    bool bCanTrigger = true;
 
 	// Use this for initialization
 	void Start () {
