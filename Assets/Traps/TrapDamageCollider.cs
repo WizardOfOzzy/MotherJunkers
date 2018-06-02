@@ -7,9 +7,6 @@ public class TrapDamageCollider : MonoBehaviour {
     public bool bDebugging = false;
 
     public float ImpulseAmount = 0.0f;
-
-    public Vector3 ImpluseDirection;
-
     public float DamageAmount = 0.0f;
 
     public Collider DamageCollider;
