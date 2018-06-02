@@ -67,6 +67,5 @@ public class Weapon : Item
 	{
         // Init
         CurrentAmmo = MaxAmmo;
-        spawnPoint = transform;
 	}
 }
