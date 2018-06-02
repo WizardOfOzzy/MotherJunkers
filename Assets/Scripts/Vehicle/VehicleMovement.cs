@@ -54,7 +54,7 @@ public class VehicleMovement : MonoBehaviour
     void Start()
     {
         _RigidBody = GetComponent<Rigidbody>();
-        _Camera = GameObject.FindObjectOfType<Camera>();
+        _Camera = FindObjectOfType<Camera>();
     }
 
      public void SetMovementDirection(Vector2 direction)
