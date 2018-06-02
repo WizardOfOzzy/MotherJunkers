@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23045505096544626}
   - component: {fileID: 65766685987273562}
   - component: {fileID: 114502157812515880}
+  - component: {fileID: 114549464056083408}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -115,3 +116,15 @@ MonoBehaviour:
   _Brake: 1
   _BoostMultiplier: 1
   _MaxTargetDistance: 50
+--- !u!114 &114549464056083408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029934502974978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305967d53a07bef4fb9eb4917e55852f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: 1
