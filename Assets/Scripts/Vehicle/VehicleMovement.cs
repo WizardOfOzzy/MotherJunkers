@@ -29,8 +29,8 @@ public class VehicleMovement : MonoBehaviour
 
         CollectInput(out x, out y);
 
-        Debug.Log("x : " + x);
-        Debug.Log("y : " + y);
+        //Debug.Log("x : " + x);
+        //Debug.Log("y : " + y);
 
         // Apply horizontal force
         ApplyForce(_Camera.transform.right * x, _ForceMultiplier);

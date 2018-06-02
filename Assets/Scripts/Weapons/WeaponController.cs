@@ -43,6 +43,12 @@ public class WeaponController : MonoBehaviour
         {
             DestroyWeapon(_specialWeapon);
         }
+
+        if (_activeWeaponIdx != 0)
+        {
+            _activeWeaponIdx = 0;
+            EnableWeapon(_activeWeaponIdx);
+        }
     }
 
     public void FireWeapon()
@@ -52,23 +58,26 @@ public class WeaponController : MonoBehaviour
 
     public void SwapWeapons(bool next = true)
     {
-        int iter = next ? 1 : -1;
-        int nextWeapon = _activeWeaponIdx + iter;
+        if (_specialWeapon != null)
+        {
+            int iter = next ? 1 : -1;
+            int nextWeapon = _activeWeaponIdx + iter;
 
-        if (nextWeapon < 0)
-        {
-            nextWeapon = MAX_WEAPONS - 1;
-        }
-        else if (nextWeapon >= MAX_WEAPONS)
-        {
-            nextWeapon = 0;
-        }
+            if (nextWeapon < 0)
+            {
+                nextWeapon = MAX_WEAPONS - 1;
+            }
+            else if (nextWeapon >= MAX_WEAPONS)
+            {
+                nextWeapon = 0;
+            }
 
-        if (nextWeapon != _activeWeaponIdx)
-        {
-            DisableWeapon(_activeWeaponIdx);
-            EnableWeapon(nextWeapon);
-            _activeWeaponIdx = nextWeapon;
+            if (nextWeapon != _activeWeaponIdx)
+            {
+                DisableWeapon(_activeWeaponIdx);
+                EnableWeapon(nextWeapon);
+                _activeWeaponIdx = nextWeapon;
+            }
         }
     }
 
