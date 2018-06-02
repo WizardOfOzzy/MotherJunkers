@@ -8,6 +8,42 @@ public class VehicleMovement : MonoBehaviour
     Rigidbody _RigidBody;
     Camera _Camera;
 
+    	/** Mass of the vehicle */
+	[SerializeField]
+	public float _Mass;
+
+	/** Velocity of this object */
+	Vector3 _Velocity;
+
+	/** Maximum speed at which we can travel */
+	[SerializeField]
+	public float _MaxSpeed;
+
+	/** Maximum force which can be applied to this vehicle */
+	[SerializeField]
+	public float _MaxForce;
+
+	/** Maximum rate (radians per second) this vehicle can turn */
+	[SerializeField]
+	public float _MaxTurnRate;
+
+	/** Amount of braking to apply to the desired velocity */
+	[SerializeField]
+	public float _Brake;
+
+	/** Amount of boost to apply to the vehicle */
+	[SerializeField]
+	public float _BoostMultiplier;
+
+	/** Relative target to which we are attempting to move (Used for debugging) */
+	Vector3 _TargetDestination;
+
+    Vector2 _inputDirection;
+
+	/** Maximum distance for the target destination */
+	[SerializeField]
+	public float _MaxTargetDistance;
+
     [SerializeField]
     float _ForceMultiplier;
 
@@ -18,37 +54,36 @@ public class VehicleMovement : MonoBehaviour
     void Start()
     {
         _RigidBody = GetComponent<Rigidbody>();
-        _Camera = GameObject.FindObjectOfType<Camera>();
+        _Camera = FindObjectOfType<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
+     public void SetMovementDirection(Vector2 direction)
     {
-        float x;
-        float y;
+        _inputDirection = direction;
+    }
 
-        CollectInput(out x, out y);
+    Vector3 CalculateForce()
+	{
+		Vector3 DesiredVelocity = (_TargetDestination - transform.position);
+		DesiredVelocity.Normalize ();
+		DesiredVelocity *= _MaxSpeed;
 
-        //Debug.Log("x : " + x);
-        //Debug.Log("y : " + y);
+		return (DesiredVelocity - _Velocity);
+	}
 
+    private void FixedUpdate()
+    {    
         // Apply horizontal force
-        ApplyForce(_Camera.transform.right * x, _ForceMultiplier);
+        ApplyForce(_Camera.transform.right * _inputDirection.x, _ForceMultiplier);
 
         // Apply vertical force
-        ApplyForce(_Camera.transform.up * y, _ForceMultiplier);
+        ApplyForce(_Camera.transform.up * transform.position.y, _ForceMultiplier);
 
         // Truncate velocity
         if (_RigidBody.velocity.magnitude > _MaxVelocity)
         {
             _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity;
         }
-    }
-
-    void CollectInput(out float x, out float y)
-    {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
     }
 
     void ApplyForce(Vector3 Direction, float force)
