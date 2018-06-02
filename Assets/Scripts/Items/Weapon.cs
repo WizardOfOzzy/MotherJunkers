@@ -25,8 +25,6 @@ public class Weapon : Item
     [SerializeField]
     private GameObject ProjectilePrefab;
 
-    [SerializeField]
-    protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
     public bool TryFireWeapon()
     {
@@ -67,6 +65,5 @@ public class Weapon : Item
 	{
         // Init
         CurrentAmmo = MaxAmmo;
-        spawnPoint = transform;
 	}
 }

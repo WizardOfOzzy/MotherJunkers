@@ -15,7 +15,7 @@ public class StandardMachineGun : Weapon {
     protected override void FireWeapon()
     {
         //base.FireWeapon();
-        MachineGunPool.Instance.SpawnProjectile(spawnPoint.position + Random.onUnitSphere * offset, spawnPoint.rotation);
+        MachineGunPool.Instance.SpawnProjectile(transform.position + Random.onUnitSphere * offset, transform.rotation);
     }
     protected override bool CanFire()
     {
