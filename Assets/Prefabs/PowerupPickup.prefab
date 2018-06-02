@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4713162570325362}
   - component: {fileID: 114155647940662904}
+  - component: {fileID: 65979452560845146}
   m_Layer: 0
   m_Name: PowerupPickup
   m_TagString: Untagged
@@ -122,6 +123,18 @@ BoxCollider:
   m_GameObject: {fileID: 1073415086468576}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65979452560845146
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468678614399984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

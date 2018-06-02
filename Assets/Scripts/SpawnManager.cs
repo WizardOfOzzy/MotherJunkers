@@ -30,15 +30,18 @@ public class SpawnManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+		if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Spawn(PickupType.weapon);
+        }
+    }
     #endregion
 
     #region Public Declarations
     public GameObject WeaponPrefab;
     public GameObject BoostPrefab;
     public GameObject PowerupPrefab;
-    private List<Location> locations = new List<Location>();
+    public static List<Location> locations = new List<Location>();
     public GameObject SpawnLocations;
     #endregion
 
@@ -62,36 +65,56 @@ public class SpawnManager : MonoBehaviour {
 
         GameObject newPickup = Instantiate(selectedPrefab);
         newPickup.transform.SetParent(transform);
-        newPickup.transform.localPosition = GetAvailablePosition();
+        Location foundLocation = GetAvailablePosition();
 
+        if (!foundLocation.Equals(default(Location)))
+        {
+            newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
-        Pickup weapon = newPickup.GetComponent<Pickup>();
-        weapon.Init(someType, 0.5f);
+            Pickup weapon = newPickup.GetComponent<Pickup>();
+            weapon.Init(someType, 0.5f, foundLocation);
 
-        pickups.Add(newPickup);
+            pickups.Add(newPickup);
+        }
     }
 
-    private Vector3 GetAvailablePosition()
+    public static void FreeLocation(Location loc)
     {
-        Vector3 availablePosition = Vector3.zero;
-
-        int someLocation = locations.FindLastIndex(s => s.available);
-        
+        int someLocation = locations.FindLastIndex(s => s.Equals(loc));
+        Location locationToFree;
         if (someLocation != -1)
         {
-            Location foundLocation = locations[someLocation];
-            availablePosition = foundLocation.actualObj.transform.localPosition;
-            foundLocation.available = false;
+            locationToFree = locations[someLocation];
+            locationToFree.available = true;
 
             locations.RemoveAt(someLocation);
-            locations.Add(foundLocation);
+            locations.Add(locationToFree);
+        }
+    }
+    #endregion
+
+    #region Private Methods
+
+    private Location GetAvailablePosition()
+    {
+        Location availableLocation = default(Location);
+
+        int someLocation = locations.FindLastIndex(s => s.available);
+
+        if (someLocation != -1)
+        {
+            availableLocation = locations[someLocation];
+            availableLocation.available = false;
+
+            locations.RemoveAt(someLocation);
+            locations.Add(availableLocation);
         }
         else
         {
             Debug.Log("No spawn positions found!!");
         }
 
-        return availablePosition;
+        return availableLocation;
     }
     #endregion
 }

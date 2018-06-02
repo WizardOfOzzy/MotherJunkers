@@ -6,11 +6,13 @@ public class ItemController : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
-        Item item = other.GetComponentInChildren<Item>();
+        Pickup pickup = other.GetComponent<Pickup>();
 
-        if (item != null)
+        if (pickup != null)
         {
+            Item item = pickup.GetItem().GetComponent<Item>();
             AddPickup(item);
+            pickup.Cleanup();
         }
 	}
 
