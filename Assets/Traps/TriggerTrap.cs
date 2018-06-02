@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TriggerTrap : MonoBehaviour {
 
-    TheTrap [] Traps;
-    //TheTrigger Trigger;
+    public TheTrap [] Traps;
+    public TheTrigger Trigger;
 
 
     // Use this for initialization

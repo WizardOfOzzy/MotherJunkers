@@ -9,7 +9,16 @@ public class Weapon : Item
     private const float MIN_AMMO = 0f;
 
     [SerializeField]
-    private float CurrentAmmo, MaxAmmo, AmmoPerShot, ShotsPerSecond;
+    private float CurrentAmmo;
+
+    [SerializeField]
+    private float MaxAmmo;
+
+    [SerializeField]
+    private float AmmoPerShot;
+
+    [SerializeField]
+    private float ShotsPerSecond;
 
     public bool HasInfiniteAmmo;
 
@@ -46,4 +55,10 @@ public class Weapon : Item
     {
         // TODO - spawn projecticle prefab, have it do things
     }
+
+	private void Start()
+	{
+        // Init
+        CurrentAmmo = MaxAmmo;
+	}
 }
