@@ -22,7 +22,9 @@ public class MachineGunPool : MonoBehaviour {
         for (int i = 0; i < val; i++)
         {
             GameObject g = GameObject.Instantiate(prefab);
-            ReturnProjectile(g.GetComponent<Poolable>());
+            Poolable p = g.GetComponent<Poolable>();
+            p.OnCreation();
+            ReturnProjectile(p);
         }
     }
 
