@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
@@ -18,14 +19,17 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    public int spawnCount = 20;
+    public float interval = 10000f;
+    bool ready = false;
+    
     void Start()
     {
+        InvokeRepeating("SpawnWeapon", 1f, 10f); ;
+    }
+
+    void SpawnWeapon() {
         Spawn(PickupType.weapon);
-        Spawn(PickupType.boost);
-        Spawn(PickupType.powerup);
-        Spawn(PickupType.weapon);
-        Spawn(PickupType.boost);
-        Spawn(PickupType.powerup);
     }
 
 	// Update is called once per frame
@@ -72,7 +76,7 @@ public class SpawnManager : MonoBehaviour {
             newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
             Pickup weapon = newPickup.GetComponent<Pickup>();
-            weapon.Init(someType, 2000f, foundLocation);
+            weapon.Init(someType, 8000f, foundLocation);
             
             pickups.Add(newPickup);
         }
@@ -99,19 +103,21 @@ public class SpawnManager : MonoBehaviour {
     {
         Location availableLocation = default(Location);
 
-        int someLocation = locations.FindLastIndex(s => s.available);
+        List<Location> someLocations = locations.FindAll(s => s.available);
 
-        if (someLocation != -1)
+        if (someLocations.Count > 0)
         {
-            availableLocation = locations[someLocation];
+            System.Random rnd = new System.Random();
+            int r = rnd.Next(someLocations.Count);
+            availableLocation = locations[r];
             availableLocation.available = false;
 
-            locations.RemoveAt(someLocation);
+            locations.RemoveAt(r);
             locations.Add(availableLocation);
         }
         else
         {
-            Debug.Log("No spawn positions found!!");
+            UnityEngine.Debug.Log("No spawn positions found!!");
         }
 
         return availableLocation;

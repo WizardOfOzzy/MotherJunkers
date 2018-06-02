@@ -13,4 +13,9 @@ public class Poolable : MonoBehaviour {
     {
 
     }
+
+    public virtual void OnCreation()
+    {
+
+    }
 }

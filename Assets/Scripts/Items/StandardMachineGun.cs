@@ -5,7 +5,7 @@ using UnityEngine;
 public class StandardMachineGun : Weapon {
     float fireRate;
     float fireTrack;
-    float offset = .5f;
+    float offset = .25f;
     protected override void Start()
     {
         base.Start();
@@ -27,10 +27,10 @@ public class StandardMachineGun : Weapon {
     {
         if (fireTrack > 0)
             fireTrack -= Time.deltaTime;
-        /*
+        
         if (Input.GetKey(KeyCode.Space))
         {
             TryFireWeapon();
-        }*/
+        }
     }
 }
