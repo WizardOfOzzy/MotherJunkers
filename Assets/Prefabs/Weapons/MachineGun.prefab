@@ -99,7 +99,6 @@ MonoBehaviour:
   CurrentAmmo: 1
   MaxAmmo: 1
   AmmoPerShot: 1
-  ShotsPerSecond: 1
+  ShotsPerSecond: 10
   HasInfiniteAmmo: 1
   ProjectilePrefab: {fileID: 0}
-  roundsPerSecond: 10
