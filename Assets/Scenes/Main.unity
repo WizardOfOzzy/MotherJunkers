@@ -1515,15 +1515,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4339536826959576, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.370959
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4339536826959576, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.327876
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 4339536826959576, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -29.65126
+      value: -17.8
       objectReference: {fileID: 0}
     - target: {fileID: 4339536826959576, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1544,51 +1544,6 @@ Prefab:
     - target: {fileID: 4339536826959576, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _Mass
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _MaxSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _MaxForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _MaxTurnRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _Brake
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _BoostMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _MaxTargetDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _ForceMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114502157812515880, guid: c80083e11a9e1cc4f902f12228b9abba,
-        type: 2}
-      propertyPath: _MaxVelocity
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c80083e11a9e1cc4f902f12228b9abba, type: 2}
@@ -4322,7 +4277,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1678367413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 17.61, z: -60.58}
+  m_LocalPosition: {x: 14.2, y: 0.79, z: -24.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
