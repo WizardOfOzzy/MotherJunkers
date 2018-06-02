@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using System.Diagnostics;
+
 public enum PickupType { weapon, boost, powerup };
 
 public class Pickup : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Delete))
+        if (Input.GetKeyUp(KeyCode.Delete) || _timer.ElapsedMilliseconds > _duration)
         {
             Cleanup();
         }
@@ -17,11 +18,14 @@ public class Pickup : MonoBehaviour
         _pickupType = ptype;
         _duration = setDuration;
         _usedLocation = usedLocation;
+
+        _timer = new Stopwatch();
+        _timer.Start();
     }
 
     public void Cleanup()
     {
-        Debug.Log(_pickupType + " - " + _duration);
+        UnityEngine.Debug.Log(_pickupType + " - " + _duration);
         SpawnManager.FreeLocation(_usedLocation);
         Destroy(gameObject);
     }
@@ -34,4 +38,5 @@ public class Pickup : MonoBehaviour
     private PickupType _pickupType;
     private float _duration;
     private Location _usedLocation;
+    private Stopwatch _timer = new Stopwatch();
 }

@@ -72,8 +72,8 @@ public class SpawnManager : MonoBehaviour {
             newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
             Pickup weapon = newPickup.GetComponent<Pickup>();
-            weapon.Init(someType, 0.5f, foundLocation);
-
+            weapon.Init(someType, 2000f, foundLocation);
+            
             pickups.Add(newPickup);
         }
     }
