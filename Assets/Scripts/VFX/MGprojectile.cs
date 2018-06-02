@@ -26,4 +26,8 @@ public class MGprojectile : Poolable {
         yield return new WaitForSeconds(time);
         MachineGunPool.Instance.ReturnProjectile(this);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        MachineGunPool.Instance.ReturnProjectile(this);
+    }
 }

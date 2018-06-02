@@ -23,7 +23,7 @@ public class Weapon : Item
     public bool HasInfiniteAmmo;
 
     [SerializeField]
-    private GameObject ProjectilePrefab;
+    protected GameObject ProjectilePrefab;
 
     [SerializeField]
     protected Transform spawnPoint;
