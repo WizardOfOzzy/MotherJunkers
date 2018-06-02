@@ -24,6 +24,14 @@ public class WeaponController : MonoBehaviour
 
         _specialWeapon = weapon;
         ParentWeaponGameObject(weapon.gameObject);
+
+        // Disable active weapon, enable and set special weapon active
+        if (_activeWeaponIdx == 0)
+        {
+            DisableWeapon(_activeWeaponIdx);
+        }
+        _activeWeaponIdx = 1;
+        EnableWeapon(_activeWeaponIdx);
     }
 
     public void DestroyActiveWeapon()

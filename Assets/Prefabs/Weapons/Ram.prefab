@@ -102,3 +102,4 @@ MonoBehaviour:
   ShotsPerSecond: 1
   HasInfiniteAmmo: 1
   ProjectilePrefab: {fileID: 0}
+  spawnPoint: {fileID: 0}
