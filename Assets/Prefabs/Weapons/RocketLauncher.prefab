@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1794219285226902}
   m_IsPrefabParent: 1
+--- !u!1 &1231011124944640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4144027038581672}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1662110450294824
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4231358280042092}
-  - component: {fileID: 114035981793449834}
+  - component: {fileID: 114220522728220364}
   m_Layer: 0
   m_Name: RocketLauncher
   m_TagString: Untagged
@@ -44,6 +59,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4144027038581672
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231011124944640}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4231358280042092}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4231358280042092
 Transform:
   m_ObjectHideFlags: 1
@@ -51,10 +79,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794219285226902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4985015992079510}
+  - {fileID: 4144027038581672}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,7 +142,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662110450294824}
   m_Mesh: {fileID: 4300000, guid: b7e5211848c01465d94caffc93ff35a2, type: 3}
---- !u!114 &114035981793449834
+--- !u!114 &114220522728220364
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,14 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1794219285226902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6bc219d31eb4f01ac28dec80ba51a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c5b6fa462563074d99934bfd8523ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Rocket Launcher
-  CurrentAmmo: 1
-  MaxAmmo: 1
+  CurrentAmmo: 100
+  MaxAmmo: 100
   AmmoPerShot: 1
   ShotsPerSecond: 1
-  HasInfiniteAmmo: 1
-  ProjectilePrefab: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  HasInfiniteAmmo: 0
+  ProjectilePrefab: {fileID: 1011827789304504, guid: 470f2e3e6fd41e64ea44931309b89f59,
+    type: 2}
+  spawnPoint: {fileID: 4144027038581672}

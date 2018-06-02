@@ -8,6 +8,8 @@ public class Publisher
 {
     public static void Subscribe<T>(PublisherEventDelegate<T> eventDelegate) where T : PublisherEvent
     {
+        CheckLazyLoad();
+
         if (_publisherEventMappings.ContainsKey(typeof(T)))
         {
             PublisherEventMapper<T> mapper = (PublisherEventMapper<T>)(_publisherEventMappings[typeof(T)]);
@@ -21,6 +23,8 @@ public class Publisher
 
     public static void Unsubscribe<T>(PublisherEventDelegate<T> eventDelegate) where T : PublisherEvent
     {
+        CheckLazyLoad();
+
         if (_publisherEventMappings.ContainsKey(typeof(T)))
         {
             PublisherEventMapper<T> mapper = (PublisherEventMapper<T>)(_publisherEventMappings[typeof(T)]);
@@ -34,6 +38,9 @@ public class Publisher
 
     public static void Raise<T>(T evt) where T : PublisherEvent
     {
+        CheckLazyLoad();
+
+
         if (_publisherEventMappings.ContainsKey(evt.GetType()))
         {
             PublisherEventMapper<T> mapper = (PublisherEventMapper<T>)(_publisherEventMappings[typeof(T)]);
@@ -51,7 +58,17 @@ public class Publisher
         // Init all publisher events we want to support.
         _publisherEventMappings = new Dictionary<System.Type, PublisherEventMapperBase>();
 
-        //AddPublisherEvent<PaddleGroupDestroyedEvent>();
+        AddPublisherEvent<WeaponFiredEvent>();
+        AddPublisherEvent<WeaponChangedEvent>();
+    }
+
+    private static void CheckLazyLoad()
+    {
+        // CBO - Lazy-Loading - this is inefficient...
+        if (_publisherEventMappings == null)
+        {
+            Init();
+        }
     }
 
     private static void AddPublisherEvent<T>() where T : PublisherEvent
