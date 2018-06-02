@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4043788636789138}
   - component: {fileID: 33119011971086444}
   - component: {fileID: 23588044471576396}
-  - component: {fileID: 114158606146949420}
+  - component: {fileID: 114843210408359096}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1772494627662246}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114158606146949420
+--- !u!114 &114843210408359096
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,13 +92,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1772494627662246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6bc219d31eb4f01ac28dec80ba51a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 63b702ea53d77a04c88f3f841f11d9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Ram
+  Name: Machine Gun
   CurrentAmmo: 1
   MaxAmmo: 1
   AmmoPerShot: 1
   ShotsPerSecond: 1
   HasInfiniteAmmo: 1
   ProjectilePrefab: {fileID: 0}
+  roundsPerSecond: 10
