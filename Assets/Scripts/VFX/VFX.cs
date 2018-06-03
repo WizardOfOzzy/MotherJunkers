@@ -6,7 +6,7 @@ public class VFX : MonoBehaviour {
     ParticleSystem rootParticles;
     public float duration = -1;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Init();
     }
 

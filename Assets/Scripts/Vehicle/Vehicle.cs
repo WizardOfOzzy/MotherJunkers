@@ -5,8 +5,10 @@ namespace MotherJunkers
     [RequireComponent(typeof(VehicleMovement))]
     public class Vehicle : MonoBehaviour
     {
-        [SerializeField]
-        EController _controller;
+        
+        public EController _controller;
+
+        public Color _Color;
 
         VehicleMovement _movement;
 
@@ -28,6 +30,16 @@ namespace MotherJunkers
             {
                 _movement.BoostOff();
             }
+
+        }
+
+        public void SetColor(Color pColor)
+        {
+            _Color = pColor;
+
+           Material VehcMat = GetComponent<Material>();
+
+            VehcMat.color = pColor;
 
         }
     }
