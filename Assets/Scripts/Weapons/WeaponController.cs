@@ -132,15 +132,15 @@ public class WeaponController : MonoBehaviour
     }
     public void Update()
     {
-        if (PlayerInput.Instance.GetButtonDown((EController)_playerIndex, EControllerButton.Button_X))
+        if (PlayerInput.Instance.GetButtonDown((EController)(_playerIndex + 1), EControllerButton.Button_X))
         {
             OnFirePressed();
         }
-        else if (PlayerInput.Instance.GetButton((EController)_playerIndex, EControllerButton.Button_X))
+        else if (PlayerInput.Instance.GetButton((EController)(_playerIndex + 1), EControllerButton.Button_X))
         {
             OnFireHeld();
         }
-        else if (PlayerInput.Instance.GetButtonUp((EController)_playerIndex, EControllerButton.Button_X))
+        else if (PlayerInput.Instance.GetButtonUp((EController)(_playerIndex + 1), EControllerButton.Button_X))
         {
             OnFireReleased();
         }

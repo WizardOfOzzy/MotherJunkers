@@ -58,6 +58,7 @@ public class GameStateManager : MonoBehaviour
         {
             if (CheckForStart())
             {
+                _playerManager.SpawnAllPlayers();
                 JoinScreenUI.gameObject.SetActive(false);
                 GameState = EGameState.PlayScreen;
                 PlayerUI.gameObject.SetActive(true);
