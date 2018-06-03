@@ -52,11 +52,16 @@ public class GameStateManager : MonoBehaviour
 
     private void JoinScreenState()
     {
-        if (CheckForStart())
+        CheckForPlayerJoin();
+
+        if (_playerManager.Players.Count > 1)
         {
-            JoinScreenUI.gameObject.SetActive(false);
-            GameState = EGameState.PlayScreen;
-            PlayerUI.gameObject.SetActive(true);
+            if (CheckForStart())
+            {
+                JoinScreenUI.gameObject.SetActive(false);
+                GameState = EGameState.PlayScreen;
+                PlayerUI.gameObject.SetActive(true);
+            } 
         }
     }
 
@@ -65,15 +70,66 @@ public class GameStateManager : MonoBehaviour
         //Check for when someone wins
     }
 
+    private void CheckForPlayerJoin()
+    {
+        if (_playerManager == null)
+        {
+            _playerManager = FindObjectOfType<PlayerManager>();
+            _playerManager.enabled = true;
+        }
+
+        for (int i = 1; i <= 4; i++)
+        {
+            EController player = (EController)i;
+            if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_A))
+            {
+                bool shouldAdd = true;
+                for (int j = 0; j < _playerManager.Players.Count; j++)
+                {
+                    if (_playerManager.Players[j].controller == player)
+                    {
+                        shouldAdd = false;
+                        break;
+                    }
+                }
+
+                if (shouldAdd)
+                {
+                    _playerManager.AddPlayer(player, GetPlayerColor(player));
+                }
+            }
+        }
+
+    }
+
+    private Color GetPlayerColor(EController player)
+    {
+        switch (player)
+        {
+            case EController.Controller1:
+                return Color.red;
+            case EController.Controller2:
+                return Color.green;
+            case EController.Controller3:
+                return Color.blue;
+            default:
+                return Color.yellow;
+        }
+    }
+
+    private PlayerManager _playerManager;
+
     private bool CheckForStart()
     {
+        bool didStart = false;
         for (int i = 1; i <= 4; i++)
         {
             if (PlayerInput.Instance.GetButtonUp((EController)i, EControllerButton.Button_Start))
             {
-                return true;
+                didStart =  true;
+                break;
             }
         }
-        return false;
+        return didStart;
     }
 }
