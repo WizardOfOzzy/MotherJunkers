@@ -15,14 +15,18 @@ public class Pickup : MonoBehaviour
         transform.Rotate(Vector3.up, _spinRate * Time.deltaTime);
     }
 
-    public void Init(GameObject prefab, float setDuration,Location usedLocation)
+    public void Init(PickupType ptype, float setDuration,Location usedLocation)
     {
-        _pickupType = prefab;
+        _pickupType = ptype;
         _duration = setDuration;
         _usedLocation = usedLocation;
         
-        prefab.transform.SetParent(transform);
-        prefab.transform.localPosition = Vector3.zero;
+        if (_pickupType == PickupType.weapon)
+        {
+            GameObject weaponPrefab = Instantiate(WeaponFactory.Instance.GetRandomWeapon());
+            weaponPrefab.transform.SetParent(transform);
+            weaponPrefab.transform.localPosition = Vector3.zero;
+        }
 
         _timer = new Stopwatch();
         _timer.Start();
@@ -40,7 +44,7 @@ public class Pickup : MonoBehaviour
         return transform.GetChild(0).gameObject;
     }
 
-    private GameObject _pickupType;
+    private PickupType _pickupType;
     private float _duration;
     private Location _usedLocation;
     private Stopwatch _timer = new Stopwatch();

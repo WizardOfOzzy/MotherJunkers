@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Weapon : Item 
 {
+    [SerializeField]
+    protected AudioSource _audioSource;
+
     public string Name;
 
     private const float MIN_AMMO = 0f;
@@ -56,8 +59,9 @@ public class Weapon : Item
 
     protected virtual void FireWeapon()
     {
-        // TODO - spawn projecticle prefab, have it do things
+        
     }
+
     protected virtual bool CanFire()
     {
         bool result = false;

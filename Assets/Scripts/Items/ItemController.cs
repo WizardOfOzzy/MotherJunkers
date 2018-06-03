@@ -14,8 +14,7 @@ public class ItemController : MonoBehaviour
         Pickup pickup = other.GetComponent<Pickup>();
 
         if (pickup != null)
-        {
-            
+        {           
             Item item = pickup.GetItem().GetComponent<Item>();
             AddPickup(item);
             pickup.Cleanup();
@@ -43,5 +42,10 @@ public class ItemController : MonoBehaviour
     private void AddBoost(BoostItem item)
     {
         // TODO - add boost to BoostController, destroy Boost GameObject
+    }
+
+    public void AttachWeaponController(WeaponController controller)
+    {
+        _weaponController = controller;
     }
 }

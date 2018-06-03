@@ -31,7 +31,7 @@ public class PlayerUI : MonoBehaviour
     {
         if (e.PlayerIndex == PlayerIndex)
         {
-            AmmoUI.SetMaxAmmoSize((int)e.Weapon.Max_Ammo);
+            AmmoUI.SetMaxAmmoSize(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Max_Ammo);
         }
     }
 }

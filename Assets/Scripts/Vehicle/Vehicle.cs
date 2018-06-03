@@ -15,6 +15,11 @@ namespace MotherJunkers
         void Start()
         {
             _movement = GetComponent<VehicleMovement>();
+
+            //HACK: Avoids changing the prefab because this reference keeps gettinf borked
+            ItemController  _itemController = GetComponent<ItemController>() as ItemController;
+            WeaponController  _weaponController = GetComponent<WeaponController>() as WeaponController;
+            _itemController.AttachWeaponController(_weaponController);
         }
 
         private void Update()
@@ -37,11 +42,9 @@ namespace MotherJunkers
         public void SetColor(Color pColor)
         {
             _Color = pColor;
-
-           Material VehcMat = GetComponent<Material>();
-
-            VehcMat.color = pColor;
-
+            Material VehcMat = GetComponent<Material>();
+            if (VehcMat != null)
+                VehcMat.color = pColor;
         }
     }
 }
