@@ -19,6 +19,9 @@ public class WeaponController : MonoBehaviour
 
     // TODO - get this from a separate component
     public int _playerIndex = 0;
+
+
+
     public void AttachWeapon(Weapon weapon)
     {
         weapon._playerIndex = _playerIndex;
@@ -58,8 +61,7 @@ public class WeaponController : MonoBehaviour
         bool didFire = _activeWeapon.TryFireWeapon();
         if (didFire)
         {
-            WeaponFiredEvent evt = new WeaponFiredEvent(_playerIndex, _activeWeapon);
-            Publisher.Raise<WeaponFiredEvent>(evt);
+            Publisher.Raise(new WeaponFiredEvent(_playerIndex, _activeWeapon));
         }
     }
 
@@ -91,8 +93,7 @@ public class WeaponController : MonoBehaviour
     private void EnableWeapon(int weaponIdx)
     {
         _weapons[weaponIdx].gameObject.SetActive(true);
-        WeaponChangedEvent evt = new WeaponChangedEvent(_playerIndex, _activeWeapon);
-        Publisher.Raise<WeaponChangedEvent>(evt);
+        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
     }
 
     private void DisableWeapon(int weaponIdx)

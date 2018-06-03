@@ -10,8 +10,8 @@ public class HealthUI : MonoBehaviour
     private int _health;
     private const int MaxHealth = 200;
 
-    private const float UpdateSpeed = 0.5f;
-    private const float ShakeDuration = 0.5f;
+    private const float UpdateSpeed = 0.1f;
+    private const float ShakeDuration = 0.1f;
     public float ShakeStrength = 100.0f;
     public int Vibration = 100;
 

@@ -20,7 +20,7 @@ public class GameStateManager : MonoBehaviour
         GameState = EGameState.MainMenu;
         MainMenuUI.gameObject.SetActive(true);
         JoinScreenUI.gameObject.SetActive(false);
-        PlayerUI.gameObject.SetActive(false);
+        //PlayerUI.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -53,7 +53,7 @@ public class GameStateManager : MonoBehaviour
     {
         CheckForPlayerJoin();
 
-        if (_playerManager.Players.Count > 1)
+        if (_playerManager.Players.Count >= 1)
         {
             if (CheckForStart())
             {
@@ -102,7 +102,7 @@ public class GameStateManager : MonoBehaviour
 
     }
 
-    private Color GetPlayerColor(EController player)
+    public static Color GetPlayerColor(EController player)
     {
         switch (player)
         {

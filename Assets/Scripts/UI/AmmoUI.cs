@@ -43,6 +43,11 @@ public class AmmoUI : MonoBehaviour
             Image image = Panel.GetChild(i).GetComponent<Image>();
             Color color = image.color;
             color.a = i < count ? 1.0f : 0.0f;
+
+            if (count == -1)
+            {
+                color.a = 1.0f;
+            }
             image.color = color;
         }
     }
