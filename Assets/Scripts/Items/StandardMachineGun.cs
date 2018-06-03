@@ -10,7 +10,7 @@ public class StandardMachineGun : Weapon {
     {
         base.Start();
         fireRate = 1 / ShotsPerSecond ;
-        fireTrack = -1;
+        fireTrack = -1f;
     }
     protected override void FireWeapon()
     {
@@ -31,7 +31,6 @@ public class StandardMachineGun : Weapon {
             fireTrack -= Time.deltaTime;
             if (!_audioSource.isPlaying)
             {
-                Debug.Log("DERP");
                 _audioSource.Play();
             }
         }
