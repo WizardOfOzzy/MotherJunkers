@@ -25,18 +25,29 @@ public class SpawnManager : MonoBehaviour {
     
     void Start()
     {
-        InvokeRepeating("SpawnWeapon", 1f, 10f); ;
+        InvokeRepeating("SpawnRandom()", 1f, 10f); 
     }
 
-    void SpawnWeapon() {
-        Spawn(PickupType.weapon);
+    void SpawnRandom() {
+        if(!isBoost)
+        {
+            Spawn(PickupType.weapon);
+            isBoost = true;
+            UnityEngine.Debug.Log("weapon type selected");
+        }
+        else
+        {
+            Spawn(PickupType.boost);
+            isBoost = false;
+            UnityEngine.Debug.Log("boost type selected");
+        }
     }
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp(KeyCode.Space))
         {
-            Spawn(PickupType.weapon);
+            SpawnRandom();
         }
     }
     #endregion
@@ -47,6 +58,7 @@ public class SpawnManager : MonoBehaviour {
     public GameObject PowerupPrefab;
     public static List<Location> locations = new List<Location>();
     public GameObject SpawnLocations;
+    public bool isBoost = true;
     #endregion
 
     #region Public Methods
@@ -56,7 +68,10 @@ public class SpawnManager : MonoBehaviour {
 
         if (someType == PickupType.weapon)
         {
-            selectedPrefab = WeaponPrefab;
+            GameObject weaponPrefab = Instantiate(WeaponFactory.Instance.GetRandomWeapon());
+            weaponPrefab.transform.SetParent(transform);
+            weaponPrefab.transform.localPosition = Vector3.zero;
+            selectedPrefab = weaponPrefab;
         }
         else if (someType == PickupType.boost)
         {
@@ -75,8 +90,8 @@ public class SpawnManager : MonoBehaviour {
         {
             newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
-            Pickup weapon = newPickup.GetComponent<Pickup>();
-            weapon.Init(someType, 8000f, foundLocation);
+            Pickup pickup = newPickup.GetComponent<Pickup>();
+            pickup.Init(selectedPrefab, 8000f, foundLocation);
             
             pickups.Add(newPickup);
         }

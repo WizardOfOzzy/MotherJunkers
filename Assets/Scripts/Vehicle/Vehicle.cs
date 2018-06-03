@@ -5,8 +5,10 @@ namespace MotherJunkers
     [RequireComponent(typeof(VehicleMovement))]
     public class Vehicle : MonoBehaviour
     {
-        [SerializeField]
-        EController _controller;
+        
+        public EController _controller;
+
+        public Color _Color;
 
         VehicleMovement _movement;
 
@@ -18,6 +20,16 @@ namespace MotherJunkers
         private void Update()
         {
             _movement.SetMovementDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftVertical)));
+        }
+
+        public void SetColor(Color pColor)
+        {
+            _Color = pColor;
+
+           Material VehcMat = GetComponent<Material>();
+
+            VehcMat.color = pColor;
+
         }
     }
 }
