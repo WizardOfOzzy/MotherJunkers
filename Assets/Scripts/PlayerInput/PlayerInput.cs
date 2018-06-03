@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum EControllerAxis
 {
     LeftHorizontal,
@@ -42,13 +41,14 @@ public enum EController
 
 public class PlayerInput : Singleton<PlayerInput>
 {
-    Dictionary<EControllerAxis, string> _axisLookup;
-    Dictionary<EControllerButton, string> _buttonLookup;
+    private Dictionary<EControllerAxis, string> _axisLookup;
+    private Dictionary<EControllerButton, string> _buttonLookup;
 
-    int _controllerCount = 8;
+    private int _controllerCount = 8;
+
     public int ControllerCount { get { return _controllerCount; } set { _controllerCount = value; } }
 
-    void Awake()
+    private void Awake()
     {
         _buttonLookup = new Dictionary<EControllerButton, string>()
         {

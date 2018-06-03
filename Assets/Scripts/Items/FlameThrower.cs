@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FlameThrower : Weapon
 {
     public float ammoUseRatePer = 1;
     public VFX flameVFX;
-    float timeTrack;
+    private float timeTrack;
+
     protected override void FireWeapon()
     {
         base.FireWeapon();
-
     }
 
-    void Update()
-    {
-    }
     public override void OnFirePressed()
     {
         base.OnFirePressed();
@@ -24,11 +19,13 @@ public class FlameThrower : Weapon
         if (CurrentAmmo > 0)
             flameVFX.Play();
     }
+
     public override void OnFireReleased()
     {
         base.OnFireReleased();
         Stop();
     }
+
     public override void OnFireHeld()
     {
         base.OnFireHeld();
@@ -37,6 +34,7 @@ public class FlameThrower : Weapon
             Stop();
             return;
         }
+
         timeTrack -= Time.deltaTime;
         if (timeTrack <= 0)
         {
@@ -44,6 +42,7 @@ public class FlameThrower : Weapon
             timeTrack = ammoUseRatePer;
         }
     }
+
     public void Stop()
     {
         flameVFX.Stop();

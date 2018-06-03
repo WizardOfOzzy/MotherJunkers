@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _weaponAttach;
+    [SerializeField] private Transform _weaponAttach;
 
     private Weapon[] _weapons;
     private const int MAX_WEAPONS = 2;
 
-    [SerializeField]
-    private GameObject _machineGunPrefab;
+    [SerializeField] private GameObject _machineGunPrefab;
 
-    [SerializeField]
-    [Range(0, MAX_WEAPONS - 1)]
+    [SerializeField] [Range(0, MAX_WEAPONS - 1)]
     private int _activeWeaponIdx;
 
     // TODO - get this from a separate component
-    public int _playerIndex = 0;
-
-
+    public EController _playerIndex = 0;
+    private float prevAxisValue;
+    private const float axisThreshold = .25f;
 
     public void AttachWeapon(Weapon weapon)
     {
@@ -38,6 +33,7 @@ public class WeaponController : MonoBehaviour
         {
             DisableWeapon(_activeWeaponIdx);
         }
+
         _activeWeaponIdx = 1;
         EnableWeapon(_activeWeaponIdx);
     }
@@ -103,26 +99,16 @@ public class WeaponController : MonoBehaviour
 
     private Weapon _activeWeapon
     {
-        get
-        {
-            return _weapons[_activeWeaponIdx];
-        }
+        get { return _weapons[_activeWeaponIdx]; }
     }
 
     // CBO - this can be null! Convenience method
     private Weapon _specialWeapon
     {
-        get
-        {
-            return _weapons[1];
-        }
-        set
-        {
-            _weapons[1] = value;
-        }
+        get { return _weapons[1]; }
+        set { _weapons[1] = value; }
     }
-    float prevAxisValue;
-    float axisThreshold = .25f;
+
     private void Awake()
     {
         _weapons = new Weapon[MAX_WEAPONS];
@@ -132,9 +118,10 @@ public class WeaponController : MonoBehaviour
     {
         InitMachineGun();
     }
+
     public void Update()
     {
-        float currentAxisValue = Mathf.Abs(PlayerInput.Instance.GetAxis((EController)_playerIndex+1, EControllerAxis.Trigger));
+        float currentAxisValue = Mathf.Abs(PlayerInput.Instance.GetAxis(_playerIndex, EControllerAxis.Trigger));
 
         if (prevAxisValue < axisThreshold && currentAxisValue >= axisThreshold)
         {
@@ -148,21 +135,25 @@ public class WeaponController : MonoBehaviour
         {
             OnFireReleased();
         }
+
         prevAxisValue = currentAxisValue;
     }
 
     public void OnFirePressed()
     {
         _activeWeapon.OnFirePressed();
-        }
+    }
+
     public void OnFireHeld()
     {
         _activeWeapon.OnFireHeld();
     }
+
     public void OnFireReleased()
     {
         _activeWeapon.OnFireReleased();
     }
+
     private void InitMachineGun()
     {
         _weapons[0] = Instantiate(_machineGunPrefab).GetComponent<Weapon>();
