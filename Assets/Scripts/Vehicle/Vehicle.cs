@@ -20,6 +20,17 @@ namespace MotherJunkers
         private void Update()
         {
             _movement.SetMovementDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftVertical)));
+
+            // Check for boost
+            if (PlayerInput.Instance.GetButtonDown(_controller, EControllerButton.RightBumper))
+            {
+                _movement.BoostOn();
+            }
+            if (PlayerInput.Instance.GetButtonUp(_controller, EControllerButton.RightBumper))
+            {
+                _movement.BoostOff();
+            }
+
         }
 
         public void SetColor(Color pColor)
