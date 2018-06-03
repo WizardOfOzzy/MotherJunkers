@@ -52,7 +52,12 @@ public class GameStateManager : MonoBehaviour
 
     private void JoinScreenState()
     {
-        //Check for when enough players join
+        if (CheckForStart())
+        {
+            JoinScreenUI.gameObject.SetActive(false);
+            GameState = EGameState.PlayScreen;
+            PlayerUI.gameObject.SetActive(true);
+        }
     }
 
     private void PlayScreenState()
