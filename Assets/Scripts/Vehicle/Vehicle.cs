@@ -4,20 +4,19 @@
 [RequireComponent(typeof(VehicleMovement))]
 public class Vehicle : MonoBehaviour
 {
-    
     public EController _controller;
 
     public Color _Color;
 
-    VehicleMovement _movement;
+    private VehicleMovement _movement;
 
-    void Start()
+    private void Start()
     {
         _movement = GetComponent<VehicleMovement>();
 
-        //HACK: Avoids changing the prefab because this reference keeps gettinf borked
-        ItemController  _itemController = GetComponent<ItemController>() as ItemController;
-        WeaponController  _weaponController = GetComponent<WeaponController>() as WeaponController;
+        //HACK: Avoids changing the prefab because this reference keeps getting borked
+        ItemController  _itemController = GetComponent<ItemController>();
+        WeaponController  _weaponController = GetComponent<WeaponController>();
         _itemController.AttachWeaponController(_weaponController);
     }
 
@@ -35,7 +34,6 @@ public class Vehicle : MonoBehaviour
         {
             _movement.BoostOff();
         }
-
     }
 
     public void SetColor(Color pColor)
@@ -50,8 +48,7 @@ public class Vehicle : MonoBehaviour
 	{
         if (other.gameObject.name == "KillVolume")
         {
-            KillVolumeHitEvent evt = new KillVolumeHitEvent((int)_controller);
-            Publisher.Raise<KillVolumeHitEvent>(evt);
+            Publisher.Raise(new KillVolumeHitEvent(_controller));
             Destroy(gameObject);
         }
 	}

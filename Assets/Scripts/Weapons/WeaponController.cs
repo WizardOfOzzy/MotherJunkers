@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _weaponAttach;
+    [SerializeField] private Transform _weaponAttach;
 
     private Weapon[] _weapons;
     private const int MAX_WEAPONS = 2;
 
-    [SerializeField]
-    private GameObject _machineGunPrefab;
+    [SerializeField] private GameObject _machineGunPrefab;
 
-    [SerializeField]
-    [Range(0, MAX_WEAPONS - 1)]
+    [SerializeField] [Range(0, MAX_WEAPONS - 1)]
     private int _activeWeaponIdx;
 
     // TODO - get this from a separate component
@@ -50,6 +45,7 @@ public class WeaponController : MonoBehaviour
         {
             DisableWeapon(_activeWeaponIdx);
         }
+
         _activeWeaponIdx = 1;
         EnableWeapon(_activeWeaponIdx);
     }
@@ -115,23 +111,14 @@ public class WeaponController : MonoBehaviour
 
     private Weapon _activeWeapon
     {
-        get
-        {
-            return _weapons[_activeWeaponIdx];
-        }
+        get { return _weapons[_activeWeaponIdx]; }
     }
 
     // CBO - this can be null! Convenience method
     private Weapon _specialWeapon
     {
-        get
-        {
-            return _weapons[1];
-        }
-        set
-        {
-            _weapons[1] = value;
-        }
+        get { return _weapons[1]; }
+        set { _weapons[1] = value; }
     }
     float prevAxisValue;
     float axisThreshold = .10f;
@@ -143,7 +130,9 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         InitMachineGun();
+        Publisher.Raise(new WeaponChangedEvent((int)_playerIndex, _activeWeapon));
     }
+
     public void Update()
     {
         float currentAxisValue = PlayerInput.Instance.GetAxis(_playerIndex, EControllerAxis.RightTrigger);

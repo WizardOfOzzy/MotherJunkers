@@ -1,17 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public abstract class PublisherEvent
+﻿public abstract class PublisherEvent
 {
 
 }
 
 public abstract class WeaponEvent : PublisherEvent
 {
-    public int PlayerIndex;
+    public EController PlayerIndex;
     public Weapon Weapon;
 
-    public WeaponEvent(int playerIndex, Weapon weapon)
+    public WeaponEvent(EController playerIndex, Weapon weapon)
     {
         PlayerIndex = playerIndex;
         Weapon = weapon;
@@ -20,7 +17,7 @@ public abstract class WeaponEvent : PublisherEvent
 
 public class WeaponChangedEvent : WeaponEvent
 {
-    public WeaponChangedEvent(int playerIndex, Weapon weapon)
+    public WeaponChangedEvent(EController playerIndex, Weapon weapon)
         : base(playerIndex, weapon)
     {
         
@@ -29,7 +26,7 @@ public class WeaponChangedEvent : WeaponEvent
 
 public class WeaponFiredEvent : WeaponEvent
 {
-    public WeaponFiredEvent(int playerIndex, Weapon weapon)
+    public WeaponFiredEvent(EController playerIndex, Weapon weapon)
         : base(playerIndex, weapon)
     {
         
@@ -38,9 +35,9 @@ public class WeaponFiredEvent : WeaponEvent
 
 public class DamageTakenEvent : PublisherEvent
 {
-    public int PlayerIndex;
+    public EController PlayerIndex;
     public float CurrentHealth;
-    public DamageTakenEvent(int playerIndex, float currentHealth)
+    public DamageTakenEvent(EController playerIndex, float currentHealth)
     {
         PlayerIndex = playerIndex;
         CurrentHealth = currentHealth;
@@ -49,9 +46,9 @@ public class DamageTakenEvent : PublisherEvent
 
 public class KillVolumeHitEvent : PublisherEvent
 {
-    public int PlayerIndex;
+    public EController PlayerIndex;
 
-    public KillVolumeHitEvent(int playerIndex)
+    public KillVolumeHitEvent(EController playerIndex)
     {
         PlayerIndex = playerIndex;
     }

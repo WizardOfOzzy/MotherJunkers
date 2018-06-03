@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Weapon : Item 
 {
@@ -31,7 +29,7 @@ public class Weapon : Item
     [SerializeField]
     protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
-    public int _playerIndex = 0;
+    public EController _playerIndex = 0;
     public float Max_Ammo
     {
         get { return MaxAmmo; }
@@ -42,11 +40,20 @@ public class Weapon : Item
         get { return CurrentAmmo; }
     }
 
+    protected virtual void Start()
+    {
+        CurrentAmmo = MaxAmmo;
+
+        Vehicle vehicle = GetComponentInParent<Vehicle>();
+        if (vehicle)
+        {
+            _playerIndex = vehicle._controller;
+        }
+    }
+
     public bool TryFireWeapon()
     {
-        bool didFire = false;
-
-        didFire = CanFire();
+        bool didFire = CanFire(); 
 
         // Actually fire the weapon
         if (didFire)
@@ -59,8 +66,7 @@ public class Weapon : Item
 
     protected virtual void FireWeapon()
     {
-        WeaponFiredEvent evt = new WeaponFiredEvent(_playerIndex, this);
-        Publisher.Raise<WeaponFiredEvent>(evt);
+        Publisher.Raise(new WeaponFiredEvent(_playerIndex, this));
     }
 
     protected virtual bool CanFire()
@@ -79,11 +85,7 @@ public class Weapon : Item
         }
         return result;
     }
-	protected virtual void Start()
-	{
-        // Init
-        CurrentAmmo = MaxAmmo;
-	}
+
     public virtual void OnFirePressed()
     {
 

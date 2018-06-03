@@ -3,7 +3,7 @@
 public class PlayerUI : MonoBehaviour
 {
     public Color PlayerColor;
-    public int PlayerIndex;
+    public EController PlayerIndex;
 
     public HealthUI HealthUI;
     public AmmoUI AmmoUI;
@@ -18,13 +18,13 @@ public class PlayerUI : MonoBehaviour
         //AmmoUI.SetMaxAmmoSize(Random.Range(-1, 20));
         //AmmoUI.SetAmmoCount(2);
 
-        PlayerColor = GameStateManager.GetPlayerColor((EController) PlayerIndex);
+        PlayerColor = GameStateManager.GetPlayerColor(PlayerIndex);
         AmmoUI.SetColor(PlayerColor);
     }
 
     private void OnDamageTakenEvent(DamageTakenEvent e)
     {
-        if (e.PlayerIndex + 1 == PlayerIndex)
+        if (e.PlayerIndex == PlayerIndex)
         {
             HealthUI.SetHealth((int)e.CurrentHealth);
         }
@@ -32,7 +32,7 @@ public class PlayerUI : MonoBehaviour
 
     private void OnWeaponFiredEvent(WeaponFiredEvent e)
     {
-        if (e.PlayerIndex + 1 == PlayerIndex)
+        if (e.PlayerIndex == PlayerIndex)
         {
             AmmoUI.SetAmmoCount(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Current_Ammo);
         }
@@ -40,7 +40,8 @@ public class PlayerUI : MonoBehaviour
 
     private void OnWeaponChangedEvent(WeaponChangedEvent e)
     {
-        if (e.PlayerIndex + 1 == PlayerIndex)
+        Debug.Log(e.PlayerIndex + " " + e.Weapon.Name);
+        if (e.PlayerIndex == PlayerIndex)
         {
             AmmoUI.SetMaxAmmoSize(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Max_Ammo);
         }

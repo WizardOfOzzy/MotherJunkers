@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734398220389734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.242018, y: -7.363439e-17, z: 3.316198}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4811111632039040}
@@ -198,7 +198,7 @@ MonoBehaviour:
   _machineGunPrefab: {fileID: 1772494627662246, guid: 24ca9a7f46d4f452d9927342b22612cc,
     type: 2}
   _activeWeaponIdx: 0
-  _playerIndex: 0
+  _playerIndex: 1
 --- !u!114 &114763225823082506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: 1
-  _Color: {r: 0, g: 0, b: 0, a: 0}
+  _Color: {r: 1, g: 0, b: 0, a: 0}
 --- !u!114 &114981632391235474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfd69ba3185a43778358ac890a7df94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponController: {fileID: 0}
+  _weaponController: {fileID: 114499570583414560}
 --- !u!137 &137092596937640324
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
