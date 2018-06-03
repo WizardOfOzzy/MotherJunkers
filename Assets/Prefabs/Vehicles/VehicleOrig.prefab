@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114826818010807548}
   - component: {fileID: 64671838274946054}
   m_Layer: 0
-  m_Name: Vehicle
+  m_Name: VehicleOrig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ForceMultiplier: 10000
   _MaxVelocity: 10
-  _TurningForce: 10
-  _MaxAngularVelocity: 100
+  _TurningForce: 80
+  _MaxAngularVelocity: 200
 --- !u!114 &114549464056083408
 MonoBehaviour:
   m_ObjectHideFlags: 1
