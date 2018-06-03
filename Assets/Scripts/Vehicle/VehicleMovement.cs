@@ -72,7 +72,7 @@ public class VehicleMovement : MonoBehaviour
     {
         _SteeringDirection = dir;
 
-        Debug.Log("Direction : " + dir);
+        //Debug.Log("Direction : " + dir);
     }
 
     void ApplyForce(Vector3 Direction, float force)
