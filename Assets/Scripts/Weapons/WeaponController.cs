@@ -175,6 +175,7 @@ public class WeaponController : MonoBehaviour
     {
         go.transform.parent = _weaponAttach;
         go.transform.localPosition = Vector3.zero;
+        go.transform.localRotation = Quaternion.identity;
     }
 
     private void DestroyWeapon(Weapon weapon)
