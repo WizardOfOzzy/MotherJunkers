@@ -86,11 +86,14 @@ namespace MotherJunkers
         public bool GetButtonDown(EController controller, EControllerButton button)
         {
             return Input.GetButtonDown(_buttonLookup[button] + (int)controller);
+            //return Input.GetButtonDown("ButtonA_1");
         }
 
         public bool GetButtonUp(EController controller, EControllerButton button)
         {
+            //Debug.Log((int)controller);
             return Input.GetButtonUp(_buttonLookup[button] + (int)controller);
+            //return Input.GetButtonUp("ButtonA_1");
         }
 
         public bool GetButton(EController controller, EControllerButton button)
