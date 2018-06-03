@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.K))
         {
             SpawnRandom();
         }
@@ -54,31 +54,31 @@ public class SpawnManager : MonoBehaviour {
     public void Spawn(PickupType someType)
     {
         GameObject selectedPrefab = null;
-
-        if (someType == PickupType.weapon)
-        {
-            selectedPrefab = WeaponPrefab;
-        }
-        else if (someType == PickupType.boost)
-        {
-            selectedPrefab = BoostPrefab;
-        }
-        else if (someType == PickupType.powerup)
-        {
-            selectedPrefab = PowerupPrefab;
-        }
-
-        GameObject newPickup = Instantiate(selectedPrefab);
-        newPickup.transform.SetParent(transform);
         Location foundLocation = GetAvailablePosition();
-
+        
         if (!foundLocation.Equals(default(Location)))
         {
+            if (someType == PickupType.weapon)
+            {
+                selectedPrefab = WeaponPrefab;
+            }
+            else if (someType == PickupType.boost)
+            {
+                selectedPrefab = BoostPrefab;
+            }
+            else if (someType == PickupType.powerup)
+            {
+                selectedPrefab = PowerupPrefab;
+            }
+
+            GameObject newPickup = Instantiate(selectedPrefab);
+            newPickup.transform.SetParent(transform);
+
             newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
             Pickup pickup = newPickup.GetComponent<Pickup>();
             pickup.Init(someType, 8000f, foundLocation);
-            
+
             pickups.Add(newPickup);
         }
     }
