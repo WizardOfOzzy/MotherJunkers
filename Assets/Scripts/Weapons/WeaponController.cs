@@ -120,7 +120,8 @@ public class WeaponController : MonoBehaviour
             _weapons[1] = value;
         }
     }
-
+    float prevAxisValue;
+    float axisThreshold = .25f;
     private void Awake()
     {
         _weapons = new Weapon[MAX_WEAPONS];
@@ -132,18 +133,21 @@ public class WeaponController : MonoBehaviour
     }
     public void Update()
     {
-        if (PlayerInput.Instance.GetButtonDown((EController)(_playerIndex + 1), EControllerButton.Button_X))
+        float currentAxisValue = Mathf.Abs(PlayerInput.Instance.GetAxis((EController)_playerIndex+1, EControllerAxis.Trigger));
+
+        if (prevAxisValue < axisThreshold && currentAxisValue >= axisThreshold)
         {
             OnFirePressed();
         }
-        else if (PlayerInput.Instance.GetButton((EController)(_playerIndex + 1), EControllerButton.Button_X))
+        else if (prevAxisValue >= axisThreshold && currentAxisValue >= axisThreshold)
         {
             OnFireHeld();
         }
-        else if (PlayerInput.Instance.GetButtonUp((EController)(_playerIndex + 1), EControllerButton.Button_X))
+        else if (prevAxisValue >= axisThreshold && currentAxisValue < axisThreshold)
         {
             OnFireReleased();
         }
+        prevAxisValue = currentAxisValue;
     }
 
     public void OnFirePressed()
