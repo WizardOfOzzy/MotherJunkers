@@ -12,6 +12,8 @@ public class TheTrap : MonoBehaviour {
 
     public Vector3 ImpulseDirection;
 
+    public bool bUseToColliderForward = false;
+
     public float ImpulseAmount = 0.0f;
     public float DamageAmount = 0.0f;
 
@@ -39,7 +41,7 @@ public class TheTrap : MonoBehaviour {
         if (OptionalAnimationClip != null)
             OptionalAnimationClip.Play();
 
-        if (MyRigidBody)
+        else if (MyRigidBody)
             MyRigidBody.AddForce(ImpulseDirection * ImpulseAmount);
 
         if(audioSource)
@@ -55,9 +57,21 @@ public class TheTrap : MonoBehaviour {
             if (bDebugging)
                 Debug.DrawRay(contact.point, contact.normal, Color.white);
 
-            //Rigidbody RB = contact.otherCollider.GetComponent<Rigidbody>();
-            //
-            //RB.AddForce(contact.normal * ImpulseAmount);
+            if (OptionalAnimationClip != null)
+            {
+                Rigidbody RB = contact.otherCollider.GetComponent<Rigidbody>();
+
+                Vector3 ToCollidery = contact.otherCollider.transform.position - transform.position;
+
+                Vector3 impulsenomral = new Vector3(ToCollidery.x, 0, ToCollidery.z);
+
+                impulsenomral.Normalize();
+
+                if(bUseToColliderForward)
+                    transform.parent.forward = impulsenomral;
+
+                RB.AddForce(impulsenomral * ImpulseAmount);
+            }
         }
             
     }

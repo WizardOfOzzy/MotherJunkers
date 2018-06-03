@@ -22,7 +22,7 @@ public class TheTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (AmountOfTriggers <= 0 || !bCanTrigger)
+        if (AmountOfTriggers <= 0 || !bCanTrigger || other.GetComponent<TheTrap>())
             return;
 
         --AmountOfTriggers;
