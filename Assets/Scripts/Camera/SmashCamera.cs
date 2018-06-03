@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SmashCamera : MonoBehaviour 
 {
-    MotherJunkers.Vehicle[] Vehicles;
+    Vehicle[] Vehicles;
     Camera MyCamera;
     Vector3 v3LookAtPosition;
 
 
-	public void Init(MotherJunkers.Vehicle[] vehicles)
+	public void Init(Vehicle[] vehicles)
 	{
         Vehicles = vehicles;
         MyCamera = GetComponent<Camera>();
@@ -24,7 +24,7 @@ public class SmashCamera : MonoBehaviour
 
             int numberofVehicles = 0;
 
-            foreach (MotherJunkers.Vehicle Vhc in Vehicles)
+            foreach (Vehicle Vhc in Vehicles)
             {
                 if (Vhc != null)
                 {

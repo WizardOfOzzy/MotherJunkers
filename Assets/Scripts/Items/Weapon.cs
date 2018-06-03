@@ -31,7 +31,7 @@ public class Weapon : Item
     [SerializeField]
     protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
-
+    public int _playerIndex = 0;
     public float Max_Ammo
     {
         get { return MaxAmmo; }
@@ -59,7 +59,8 @@ public class Weapon : Item
 
     protected virtual void FireWeapon()
     {
-        
+        WeaponFiredEvent evt = new WeaponFiredEvent(_playerIndex, this);
+        Publisher.Raise<WeaponFiredEvent>(evt);
     }
 
     protected virtual bool CanFire()

@@ -1,5 +1,4 @@
-﻿using MotherJunkers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerJoinUI : MonoBehaviour
 {

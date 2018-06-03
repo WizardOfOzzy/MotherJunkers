@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MotherJunkers;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField]
@@ -22,6 +21,7 @@ public class WeaponController : MonoBehaviour
     public int _playerIndex = 0;
     public void AttachWeapon(Weapon weapon)
     {
+        weapon._playerIndex = _playerIndex;
         if (_specialWeapon != null)
         {
             DestroyWeapon(_specialWeapon);
