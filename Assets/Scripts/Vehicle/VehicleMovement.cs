@@ -148,17 +148,23 @@ public class VehicleMovement : MonoBehaviour
         }
 
         // Orientation
-        ApplyTurningForce(transform.up * _SteeringDirection.x, _TurningForce);
+        //ApplyTurningForce(transform.up * _SteeringDirection.x, _TurningForce);
 
-        //Vector3 MyLookAt = (_Camera.transform.right * _SteeringDirection.x) + (_Camera.transform.up * _SteeringDirection.y);
-        //transform.LookAt(MyLookAt);
+        if(_SteeringDirection.magnitude > 0.05)
+        {
+            Vector3 camSpace = -_SteeringDirection.x * _Camera.transform.forward + _SteeringDirection.y * _Camera.transform.right;
+            Vector3 axisDir = camSpace + transform.position;
+            axisDir.y = transform.position.y;
+            //_RigidBody.transform.LookAt(axisDir, _RigidBody.transform.up);
 
-        //Vector3 _camRel = _SteeringDirection.y * _Camera.transform.forward + _SteeringDirection.x * _Camera.transform.right;
-        //Vector3 _axisDir = _camRel + transform.position;
-        //Vector3 _LookAtTarget = new Vector3(_axisDir.x, transform.position.y, _axisDir.z);
-        //this.transform.LookAt(_LookAtTarget, transform.up);
+            //calculate the rotation needed 
+            Quaternion neededRotation = Quaternion.LookRotation(axisDir - _RigidBody.transform.position);
 
-        //transform.Rotat
+            //use spherical interpollation over time 
+            Quaternion interpolatedRotation = Quaternion.Slerp(_RigidBody.transform.rotation, neededRotation, Time.deltaTime * _TurningForce);
+            _RigidBody.transform.rotation = interpolatedRotation;
+        }
+
     }
 
     void Turn()
