@@ -25,22 +25,11 @@ public class SpawnManager : MonoBehaviour {
     
     void Start()
     {
-        InvokeRepeating("SpawnRandom()", 1f, 10f); 
+        InvokeRepeating("SpawnRandom", 1f, 10f); 
     }
 
     void SpawnRandom() {
-        if(!isBoost)
-        {
-            Spawn(PickupType.weapon);
-            isBoost = true;
-            UnityEngine.Debug.Log("weapon type selected");
-        }
-        else
-        {
-            Spawn(PickupType.boost);
-            isBoost = false;
-            UnityEngine.Debug.Log("boost type selected");
-        }
+       Spawn(PickupType.weapon);
     }
 
 	// Update is called once per frame
@@ -68,10 +57,7 @@ public class SpawnManager : MonoBehaviour {
 
         if (someType == PickupType.weapon)
         {
-            GameObject weaponPrefab = Instantiate(WeaponFactory.Instance.GetRandomWeapon());
-            weaponPrefab.transform.SetParent(transform);
-            weaponPrefab.transform.localPosition = Vector3.zero;
-            selectedPrefab = weaponPrefab;
+            selectedPrefab = WeaponPrefab;
         }
         else if (someType == PickupType.boost)
         {
@@ -91,7 +77,7 @@ public class SpawnManager : MonoBehaviour {
             newPickup.transform.localPosition = foundLocation.actualObj.transform.localPosition;
 
             Pickup pickup = newPickup.GetComponent<Pickup>();
-            pickup.Init(selectedPrefab, 8000f, foundLocation);
+            pickup.Init(someType, 8000f, foundLocation);
             
             pickups.Add(newPickup);
         }
