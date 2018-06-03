@@ -11,11 +11,11 @@ public class TestPlayerManager : MonoBehaviour
         GameObject gsm = GameObject.Find("GameStateManager");
         if (gsm == null)
         {
-            MotherJunkers.PlayerManager pm = this.GetComponent<MotherJunkers.PlayerManager>();
-            pm.AddPlayer(MotherJunkers.EController.Controller1, Color.red);
-            pm.AddPlayer(MotherJunkers.EController.Controller2, Color.green);
-            pm.AddPlayer(MotherJunkers.EController.Controller3, Color.blue);
-            pm.AddPlayer(MotherJunkers.EController.Controller4, Color.yellow);
+            PlayerManager pm = this.GetComponent<PlayerManager>();
+            pm.AddPlayer(EController.Controller1, Color.red);
+            pm.AddPlayer(EController.Controller2, Color.green);
+            pm.AddPlayer(EController.Controller3, Color.blue);
+            pm.AddPlayer(EController.Controller4, Color.yellow);
             pm.SpawnAllPlayers();
         }
 	}
