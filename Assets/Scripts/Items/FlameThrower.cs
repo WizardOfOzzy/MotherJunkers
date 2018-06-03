@@ -19,17 +19,16 @@ public class FlameThrower : Weapon
         {
             TryFireWeapon();
             timeTrack = ammoUseRatePer;
-            //if (CanFire())
+            if (CurrentAmmo > 0)
                 flameVFX.Play();
         }
         else if (Input.GetKey(KeyCode.Space))
         {
-            /* 
-            if (!CanFire())
+            if (CurrentAmmo <= 0)
             {
                 Stop();
                 return;
-            }*/
+            }
             timeTrack -= Time.deltaTime;
             if (timeTrack <= 0)
             {
