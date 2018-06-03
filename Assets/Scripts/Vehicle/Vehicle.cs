@@ -20,6 +20,7 @@ namespace MotherJunkers
         private void Update()
         {
             _movement.SetMovementDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftVertical)));
+            _movement.SetSteeringDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.RightHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.RightVertical)));
 
             // Check for boost
             if (PlayerInput.Instance.GetButtonDown(_controller, EControllerButton.RightBumper))
