@@ -40,12 +40,7 @@ public class Laser : Weapon
         switch (state)
         {
             case LASERSTATE.NONE:
-                if (Input.GetKeyDown(KeyCode.Space) && CurrentAmmo > 0)
-                {
-                    state = LASERSTATE.CHARGING;
-                    charging.Play();
-                    timeTracking = chargeTime;
-                }
+
                 break;
             case LASERSTATE.CHARGING:
                 timeTracking -= Time.deltaTime;
@@ -56,20 +51,6 @@ public class Laser : Weapon
                 else
                     c = _gradient.Evaluate(1 - (timeTracking / chargeTime));
                 charging.SetColor(c);
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    if (timeTracking <= 0)
-                    {
-                        state = LASERSTATE.FIRING;
-                        firing.Play();
-                        timeTracking = firingTime;
-                    }
-                    else
-                    {
-                        state = LASERSTATE.NONE;
-                    }
-                    charging.Stop();
-                }
                 break;
             case LASERSTATE.FIRING:
                 timeTracking -= Time.deltaTime;
@@ -90,5 +71,32 @@ public class Laser : Weapon
             default:
                 break;
         }
+    }
+    public override void OnFirePressed()
+    {
+        base.OnFirePressed();
+        if (CurrentAmmo > 0)
+        {
+            state = LASERSTATE.CHARGING;
+            charging.Play();
+            timeTracking = chargeTime;
+        }
+    }
+
+    public override void OnFireReleased()
+    {
+        base.OnFireReleased();
+
+        if (timeTracking <= 0)
+        {
+            state = LASERSTATE.FIRING;
+            firing.Play();
+            timeTracking = firingTime;
+        }
+        else
+        {
+            state = LASERSTATE.NONE;
+        }
+        charging.Stop();
     }
 }

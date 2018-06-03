@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MotherJunkers;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField]
@@ -20,7 +20,6 @@ public class WeaponController : MonoBehaviour
 
     // TODO - get this from a separate component
     public int _playerIndex = 0;
-
     public void AttachWeapon(Weapon weapon)
     {
         if (_specialWeapon != null)
@@ -131,7 +130,34 @@ public class WeaponController : MonoBehaviour
     {
         InitMachineGun();
     }
+    public void Update()
+    {
+        if (PlayerInput.Instance.GetButtonDown((EController)_playerIndex, EControllerButton.Button_X))
+        {
+            OnFirePressed();
+        }
+        else if (PlayerInput.Instance.GetButton((EController)_playerIndex, EControllerButton.Button_X))
+        {
+            OnFireHeld();
+        }
+        else if (PlayerInput.Instance.GetButtonUp((EController)_playerIndex, EControllerButton.Button_X))
+        {
+            OnFireReleased();
+        }
+    }
 
+    public void OnFirePressed()
+    {
+        _activeWeapon.OnFirePressed();
+        }
+    public void OnFireHeld()
+    {
+        _activeWeapon.OnFireHeld();
+    }
+    public void OnFireReleased()
+    {
+        _activeWeapon.OnFireReleased();
+    }
     private void InitMachineGun()
     {
         _weapons[0] = Instantiate(_machineGunPrefab).GetComponent<Weapon>();
