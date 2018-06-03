@@ -35,3 +35,14 @@ public class WeaponFiredEvent : WeaponEvent
         
     }
 }
+
+public class DamageTakenEvent : PublisherEvent
+{
+    public int PlayerIndex;
+    public float CurrentHealth;
+    public DamageTakenEvent(int playerIndex, float currentHealth)
+    {
+        PlayerIndex = playerIndex;
+        CurrentHealth = currentHealth;
+    }
+}
