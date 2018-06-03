@@ -9,8 +9,7 @@ namespace MotherJunkers
         LeftVertical,
         RightHorizontal,
         RightVertical,
-        LeftTrigger,
-        RightTrigger,
+        Trigger,
         DPadHorizontal,
         DPadVertical,
     }
@@ -55,7 +54,7 @@ namespace MotherJunkers
             _buttonLookup = new Dictionary<EControllerButton, string>()
             {
                 {EControllerButton.LeftDown, "LeftDown_" },
-                {EControllerButton.RightDown, "Rightdown_" },
+                {EControllerButton.RightDown, "RightDown_" },
                 
                 {EControllerButton.LeftBumper, "LeftBumper_" },
                 {EControllerButton.RightBumper, "RightBumper_" },
@@ -73,8 +72,7 @@ namespace MotherJunkers
                 {EControllerAxis.LeftVertical, "LeftVertical_" },
                 {EControllerAxis.RightHorizontal, "RightHorizontal_" },
                 {EControllerAxis.RightVertical, "RightVertical_" },
-                {EControllerAxis.LeftTrigger, "LeftTrigger_" },
-                {EControllerAxis.RightTrigger, "RightTrigger_" },
+                {EControllerAxis.Trigger, "Trigger_" },
                 {EControllerAxis.DPadHorizontal, "DPadHorizontal_" },
                 {EControllerAxis.DPadVertical, "DPadVertical_" },
             };

@@ -6,6 +6,7 @@ public class PlayerUI : MonoBehaviour
 
     public HealthUI HealthUI;
     public AmmoUI AmmoUI;
+    public StockUI StockUI;
 
     public void Start()
     {

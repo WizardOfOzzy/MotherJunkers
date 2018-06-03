@@ -118,7 +118,7 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dfdbdf6dc0964a9449d987e7553fa297, type: 2}
+  - {fileID: 2100000, guid: 78b2c99b8089942bd8aeb7912403f1c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,22 +138,40 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.012096405
+        value: 0.43478203
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.48790717
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.42028916
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -201,7 +219,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1268200877860396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24de7a4f970222445a322b52461d115d, type: 3}
+  m_Script: {fileID: 11500000, guid: 595066b518ff94ba4b880c07ca8cc25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135567082244871724
