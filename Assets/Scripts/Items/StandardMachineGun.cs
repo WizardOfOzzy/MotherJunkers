@@ -39,9 +39,10 @@ public class StandardMachineGun : Weapon {
             _audioSource.Stop();
             _audioSource.time = 0;
         }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            TryFireWeapon();
-        }
+    }
+    public override void OnFireHeld()
+    {
+        base.OnFireHeld();
+        TryFireWeapon();
     }
 }

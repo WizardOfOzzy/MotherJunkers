@@ -15,34 +15,35 @@ public class FlameThrower : Weapon
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+    }
+    public override void OnFirePressed()
+    {
+        base.OnFirePressed();
+        TryFireWeapon();
+        timeTrack = ammoUseRatePer;
+        if (CurrentAmmo > 0)
+            flameVFX.Play();
+    }
+    public override void OnFireReleased()
+    {
+        base.OnFireReleased();
+        Stop();
+    }
+    public override void OnFireHeld()
+    {
+        base.OnFireHeld();
+        if (CurrentAmmo <= 0)
+        {
+            Stop();
+            return;
+        }
+        timeTrack -= Time.deltaTime;
+        if (timeTrack <= 0)
         {
             TryFireWeapon();
             timeTrack = ammoUseRatePer;
-            if (CurrentAmmo > 0)
-                flameVFX.Play();
-        }
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            if (CurrentAmmo <= 0)
-            {
-                Stop();
-                return;
-            }
-            timeTrack -= Time.deltaTime;
-            if (timeTrack <= 0)
-            {
-                TryFireWeapon();
-                timeTrack = ammoUseRatePer;
-            }
-
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Stop();
         }
     }
-
     public void Stop()
     {
         flameVFX.Stop();
