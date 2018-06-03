@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114998062904958674}
   - component: {fileID: 64984378488638044}
   m_Layer: 0
-  m_Name: Vehicle 1
+  m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   _machineGunPrefab: {fileID: 1772494627662246, guid: 24ca9a7f46d4f452d9927342b22612cc,
     type: 2}
   _activeWeaponIdx: 0
+  _playerIndex: 0
 --- !u!114 &114763225823082506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: 1
+  _Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114981632391235474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfd69ba3185a43778358ac890a7df94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponController: {fileID: 0}
 --- !u!137 &137092596937640324
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

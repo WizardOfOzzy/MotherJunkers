@@ -9,7 +9,7 @@ public class Weapon : Item
     private const float MIN_AMMO = 0f;
 
     [SerializeField]
-    private float CurrentAmmo;
+    protected float CurrentAmmo;
 
     [SerializeField]
     private float MaxAmmo;
@@ -28,6 +28,17 @@ public class Weapon : Item
     [SerializeField]
     protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
+
+    public float Max_Ammo
+    {
+        get { return MaxAmmo; }
+    }
+
+    public float Current_Ammo
+    {
+        get { return CurrentAmmo; }
+    }
+
     public bool TryFireWeapon()
     {
         bool didFire = false;
