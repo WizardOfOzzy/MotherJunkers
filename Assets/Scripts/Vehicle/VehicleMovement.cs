@@ -19,6 +19,8 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField]
     float _MaxAngularVelocity = 100.0F;
 
+    Vector2 _InputDirection;
+
     // Use this for initialization
     void Start()
     {
@@ -28,19 +30,11 @@ public class VehicleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x;
-        float y;
-
-        CollectInput(out x, out y);
-
-        Debug.Log("x : " + x);
-        Debug.Log("y : " + y);
-
         // Apply steering
-        ApplyTurningForce(transform.up * x, _TurningForce);
+        ApplyTurningForce(transform.up * -_InputDirection.x, _TurningForce);
 
         // Apply forward movement
-        ApplyForce(transform.forward * y, _ForceMultiplier);
+        ApplyForce(transform.forward * _InputDirection.y, _ForceMultiplier);
 
         // Truncate velocity
         if (_RigidBody.velocity.magnitude > _MaxVelocity)
@@ -54,10 +48,9 @@ public class VehicleMovement : MonoBehaviour
         }
     }
 
-    void CollectInput(out float x, out float y)
+    public void SetMovementDirection(Vector2 dir)
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
+        _InputDirection = dir;
     }
 
     void ApplyForce(Vector3 Direction, float force)
