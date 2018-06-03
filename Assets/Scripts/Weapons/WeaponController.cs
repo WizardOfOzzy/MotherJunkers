@@ -94,12 +94,14 @@ public class WeaponController : MonoBehaviour
 
     private void EnableWeapon(int weaponIdx)
     {
+        _weapons[weaponIdx].OnSwapIn();
         _weapons[weaponIdx].gameObject.SetActive(true);
-        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
+        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _weapons[weaponIdx]));
     }
 
     private void DisableWeapon(int weaponIdx)
     {
+        _weapons[weaponIdx].OnSwapOut();
         _weapons[weaponIdx].gameObject.SetActive(false);
     }
 
@@ -144,6 +146,9 @@ public class WeaponController : MonoBehaviour
         else if (prevAxisValue >= axisThreshold && currentAxisValue < axisThreshold)
         {
             OnFireReleased();
+        }
+        if (currentAxisValue == 0 && PlayerInput.Instance.GetButtonUp(_playerIndex, EControllerButton.Button_Y)){
+            SwapWeapons();
         }
         
         prevAxisValue = currentAxisValue;

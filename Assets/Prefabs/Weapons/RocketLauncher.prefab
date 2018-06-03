@@ -251,12 +251,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 82548772844982340}
   Name: Rocket Launcher
-  CurrentAmmo: 100
-  MaxAmmo: 100
+  CurrentAmmo: 4
+  MaxAmmo: 4
   AmmoPerShot: 1
   ShotsPerSecond: 1
   HasInfiniteAmmo: 0
   ProjectilePrefab: {fileID: 1011827789304504, guid: 470f2e3e6fd41e64ea44931309b89f59,
     type: 2}
   spawnPoint: {fileID: 4144027038581672}
+  _playerIndex: 0
+  damageColliders: []
   TimeBetweenShots: 0.3

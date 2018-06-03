@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4826137660842180}
   - component: {fileID: 33925000883205084}
   - component: {fileID: 23868414178635844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Whitebox_Weapon_Flamethrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 199592648449748358}
   - component: {fileID: 198053810569393546}
   - component: {fileID: 114756040176937062}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlameThrower Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,8 +56,40 @@ GameObject:
   - component: {fileID: 4386239942473280}
   - component: {fileID: 198656384944158234}
   - component: {fileID: 199423881914203800}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlameThrower Start Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1646147497541284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4516630110783532}
+  - component: {fileID: 65325548025934820}
+  m_Layer: 10
+  m_Name: DamageCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1731714289527922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4567193734136608}
+  - component: {fileID: 65180937827282292}
+  m_Layer: 10
+  m_Name: DamageCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +104,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4188406577271906}
   - component: {fileID: 114745026890680720}
-  m_Layer: 0
+  - component: {fileID: 54962805779308572}
+  m_Layer: 10
   m_Name: Flamethrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +124,8 @@ Transform:
   m_Children:
   - {fileID: 4351158524836010}
   - {fileID: 4826137660842180}
+  - {fileID: 4516630110783532}
+  - {fileID: 4567193734136608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,6 +155,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4351158524836010}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4516630110783532
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646147497541284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.24, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4188406577271906}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4567193734136608
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731714289527922}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4188406577271906}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4826137660842180
 Transform:
@@ -176,6 +237,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001878773943826}
   m_Mesh: {fileID: 4300000, guid: 8012060ebe052420b8f2e71ea9d8e39a, type: 3}
+--- !u!54 &54962805779308572
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951487203455146}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65180937827282292
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731714289527922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.1, y: 4.31, z: 3.31}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65325548025934820
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646147497541284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 5.78, y: 4.31, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114745026890680720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5f436b86d76994380890e24749549c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
   Name: Flamethrower
   CurrentAmmo: 100
   MaxAmmo: 100
@@ -195,8 +296,13 @@ MonoBehaviour:
   HasInfiniteAmmo: 0
   ProjectilePrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
+  _playerIndex: 0
+  damageColliders:
+  - {fileID: 65325548025934820}
+  - {fileID: 65180937827282292}
   ammoUseRatePer: 0.1
   flameVFX: {fileID: 114756040176937062}
+  damagePerSecond: 15
 --- !u!114 &114756040176937062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +327,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4752,7 +4858,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5951,7 +6057,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
         key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -5966,16 +6072,16 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 20239
-        atime2: 65535
-        atime3: 0
+        atime1: 9830
+        atime2: 20239
+        atime3: 31033
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 3
+        m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

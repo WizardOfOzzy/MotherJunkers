@@ -30,6 +30,8 @@ public class Weapon : Item
     protected Transform spawnPoint;
     // Returns true if the weapon successfully fires
     public EController _playerIndex = 0;
+    public Collider[] damageColliders;
+    
     public float Max_Ammo
     {
         get { return MaxAmmo; }
@@ -43,7 +45,7 @@ public class Weapon : Item
     protected virtual void Start()
     {
         CurrentAmmo = MaxAmmo;
-
+        SetDamageColliders(false);
         Vehicle vehicle = GetComponentInParent<Vehicle>();
         if (vehicle)
         {
@@ -97,5 +99,21 @@ public class Weapon : Item
     public virtual void OnFireReleased()
     {
 
+    }
+    public virtual void OnSwapIn()
+    {
+
+    }
+
+    public virtual void OnSwapOut()
+    {
+
+    }
+    public void SetDamageColliders(bool value)
+    {
+        foreach (Collider item in damageColliders)
+        {
+            item.enabled=value;
+        }
     }
 }

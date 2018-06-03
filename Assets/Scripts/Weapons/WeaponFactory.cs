@@ -31,7 +31,7 @@ public class WeaponFactory : MonoBehaviour
             Debug.LogError("Weapon prefabs need to be added to the WeaponFactory!");
         }
 
-        int rand = Random.Range(0, _weaponPrefabs.Length - 1);
+        int rand = Random.Range(0, _weaponPrefabs.Length);
         return _weaponPrefabs[rand];
     }
 

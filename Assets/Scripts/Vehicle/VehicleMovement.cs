@@ -31,17 +31,19 @@ public class VehicleMovement : MonoBehaviour
     public enum ESteeringType
     {
         Tank,
-        Hover
+        Hover,
+        ThrottleBased
     }
 
     [SerializeField]
     ESteeringType SteeringType = ESteeringType.Hover;
-    
+    float _throttle = 0;
     // Use this for initialization
     void Start()
     {
         _RigidBody = GetComponent<Rigidbody>();
         _Camera = GameObject.FindObjectOfType<Camera>();
+        SetSteeringType(SteeringType);
     }
 
     // Update is called once per frame
@@ -54,7 +56,12 @@ public class VehicleMovement : MonoBehaviour
                 PerformHoverSteeringUpdate();
                 break;
             }
-            case ESteeringType.Tank: 
+            case ESteeringType.Tank:
+                PerformTankSteeringUpdate();
+                break;
+            case ESteeringType.ThrottleBased:
+                PerformThrottleSteeringUpdate();
+                break;
             default: 
             {
                 PerformTankSteeringUpdate();
@@ -62,7 +69,10 @@ public class VehicleMovement : MonoBehaviour
             }
         }
     }
-
+    public void SetThrottle(float value )
+    {
+        _throttle=value;
+    }
     public void SetMovementDirection(Vector2 dir)
     {
         _InputDirection = dir;
@@ -107,6 +117,10 @@ public class VehicleMovement : MonoBehaviour
                 _BoostMultiplier = 2.0f;
                 break;
             case ESteeringType.Hover:
+                _TurningForce = 4f;
+                break;
+            case ESteeringType.ThrottleBased:
+                _TurningForce = 4f;
                 break;
             default:
                 break;
@@ -165,6 +179,34 @@ public class VehicleMovement : MonoBehaviour
             _RigidBody.transform.rotation = interpolatedRotation;
         }
 
+    }
+
+    void PerformThrottleSteeringUpdate()
+    {   
+        if (_SteeringDirection.magnitude > 0.05)
+        {
+            Vector3 camSpace = -_SteeringDirection.x * _Camera.transform.forward + _SteeringDirection.y * _Camera.transform.right;
+            Vector3 axisDir = camSpace + transform.position;
+            axisDir.y = transform.position.y;
+            //_RigidBody.transform.LookAt(axisDir, _RigidBody.transform.up);
+
+            //calculate the rotation needed 
+            Quaternion neededRotation = Quaternion.LookRotation(axisDir - _RigidBody.transform.position);
+
+            //use spherical interpollation over time 
+            Quaternion interpolatedRotation = Quaternion.Slerp(_RigidBody.transform.rotation, neededRotation, Time.deltaTime * _TurningForce);
+            _RigidBody.transform.rotation = interpolatedRotation;
+        }
+
+        float AppliedBoost = _BoostOn ? _BoostMultiplier : 1.0f;
+
+        ApplyForce(-transform.right, _ForceMultiplier*_throttle);
+
+        // Truncate velocity
+        if (_RigidBody.velocity.magnitude > _MaxVelocity * AppliedBoost)
+        {
+            _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity * AppliedBoost;
+        }
     }
 
     void Turn()

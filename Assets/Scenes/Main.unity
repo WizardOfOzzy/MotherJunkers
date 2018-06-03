@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 179092812}
   - component: {fileID: 179092811}
   - component: {fileID: 179092810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KillVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2091,7 +2091,7 @@ GameObject:
   - component: {fileID: 470960091}
   - component: {fileID: 470960090}
   - component: {fileID: 470960089}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KillVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 732578761}
   - component: {fileID: 732578760}
   - component: {fileID: 732578759}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KillVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3530,7 +3530,7 @@ GameObject:
   - component: {fileID: 910570560}
   - component: {fileID: 910570559}
   - component: {fileID: 910570558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KillVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5328,7 +5328,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1500485954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kill Volumes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,6 +16,7 @@ public class Laser : Weapon
     public float chargeTime, cooldownTime, firingTime;
     float timeTracking = 0;
     private readonly Gradient _gradient = new Gradient { mode = GradientMode.Blend };
+    public float damagePerSecond=30;
     protected override void Start()
     {
         base.Start();
@@ -59,6 +60,7 @@ public class Laser : Weapon
                     state = LASERSTATE.COOLDOWN;
                     timeTracking = cooldownTime;
                     firing.Stop(true);
+                    SetDamageColliders(false);
                 }
                 break;
             case LASERSTATE.COOLDOWN:
@@ -72,8 +74,17 @@ public class Laser : Weapon
                 break;
         }
     }
+    protected override void FireWeapon()
+    {
+        base.FireWeapon();
+        state = LASERSTATE.FIRING;
+        firing.Play();
+        timeTracking = firingTime;
+        SetDamageColliders(true);
+    }
     public override void OnFirePressed()
     {
+        if (state != LASERSTATE.NONE) return;
         base.OnFirePressed();
         if (CurrentAmmo > 0)
         {
@@ -85,18 +96,51 @@ public class Laser : Weapon
 
     public override void OnFireReleased()
     {
+        if (state != LASERSTATE.CHARGING) return;
         base.OnFireReleased();
 
         if (timeTracking <= 0)
         {
-            state = LASERSTATE.FIRING;
-            firing.Play();
-            timeTracking = firingTime;
+            TryFireWeapon();
         }
         else
         {
             state = LASERSTATE.NONE;
+            SetDamageColliders(false);
         }
         charging.Stop();
+    }
+
+    public override void OnSwapIn()
+    {
+        base.OnSwapIn();
+        SetDamageColliders(false);
+        state = LASERSTATE.NONE;
+        charging.Stop(true);
+        firing.Stop(true);
+    }
+
+    public override void OnSwapOut()
+    {
+        base.OnSwapOut();
+        SetDamageColliders(false);
+        state = LASERSTATE.NONE;
+        charging.Stop(true);
+        firing.Stop(true);
+    }
+    public void HandleCollision(GameObject g)
+    {
+        if (g.GetComponent<VehicleHealth>())
+        {
+            g.GetComponent<VehicleHealth>().TakeDamage(damagePerSecond * Time.fixedDeltaTime);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        HandleCollision(other.gameObject);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        HandleCollision(other.gameObject);
     }
 }

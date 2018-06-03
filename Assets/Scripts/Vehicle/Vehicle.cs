@@ -24,7 +24,8 @@ public class Vehicle : MonoBehaviour
     {
         _movement.SetMovementDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftVertical)));
         _movement.SetSteeringDirection(new Vector2(PlayerInput.Instance.GetAxis(_controller, EControllerAxis.RightHorizontal), PlayerInput.Instance.GetAxis(_controller, EControllerAxis.RightVertical)));
-
+        float t = PlayerInput.Instance.GetAxis(_controller, EControllerAxis.LeftTrigger);
+        _movement.SetThrottle(t);
         // Check for boost
         if (PlayerInput.Instance.GetButtonDown(_controller, EControllerButton.RightBumper))
         {
