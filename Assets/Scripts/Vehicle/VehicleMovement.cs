@@ -21,6 +21,19 @@ public class VehicleMovement : MonoBehaviour
 
     Vector2 _InputDirection;
 
+    bool _BoostOn = false;
+
+    [SerializeField]
+    float _BoostMultiplier = 1.0f;
+
+    public enum ESteeringType
+    {
+        Tank
+    }
+
+    [SerializeField]
+    ESteeringType SteeringType;
+    
     // Use this for initialization
     void Start()
     {
@@ -30,21 +43,13 @@ public class VehicleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Apply steering
-        ApplyTurningForce(transform.up * _InputDirection.x, _TurningForce);
-
-        // Apply forward movement
-        ApplyForce(transform.right * -_InputDirection.y, _ForceMultiplier);
-
-        // Truncate velocity
-        if (_RigidBody.velocity.magnitude > _MaxVelocity)
+        switch(SteeringType)
         {
-            _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity;
-        }
-
-        if(_RigidBody.angularVelocity.magnitude > _MaxAngularVelocity)
-        {
-            _RigidBody.angularVelocity = _RigidBody.angularVelocity.normalized * _MaxVelocity;
+            default: 
+            {
+                PerformTankSteeringUpdate();
+                break;
+            }
         }
     }
 
@@ -61,5 +66,35 @@ public class VehicleMovement : MonoBehaviour
     void ApplyTurningForce(Vector3 Direction, float force)
     {
         _RigidBody.AddTorque(Direction * force * Time.deltaTime);
+    }
+
+    public void BoostOn()
+    {
+        _BoostOn = true;
+    }
+    public void BoostOff()
+    {
+        _BoostOn = false;
+    }
+
+    void PerformTankSteeringUpdate()
+    {
+        // Apply steering
+        ApplyTurningForce(transform.up * _InputDirection.x, _TurningForce);
+
+        // Apply forward movement
+        float AppliedBoost = _BoostOn ? _BoostMultiplier : 1.0f;
+        ApplyForce(transform.right * -_InputDirection.y, _ForceMultiplier * AppliedBoost);
+
+        // Truncate velocity
+        if (_RigidBody.velocity.magnitude > _MaxVelocity * AppliedBoost)
+        {
+            _RigidBody.velocity = _RigidBody.velocity.normalized * _MaxVelocity * AppliedBoost;
+        }
+
+        if (_RigidBody.angularVelocity.magnitude > _MaxAngularVelocity)
+        {
+            _RigidBody.angularVelocity = _RigidBody.angularVelocity.normalized * _MaxVelocity;
+        }
     }
 }
