@@ -15,6 +15,8 @@ public class StandardMachineGun : Weapon {
     protected override void FireWeapon()
     {
         //base.FireWeapon();
+        WeaponFiredEvent evt = new WeaponFiredEvent(_playerIndex, this);
+        Publisher.Raise<WeaponFiredEvent>(evt);
         MachineGunPool.Instance.SpawnProjectile(spawnPoint.position + Random.onUnitSphere * offset, spawnPoint.rotation);
         fireTrack = fireRate;
     }
