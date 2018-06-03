@@ -46,5 +46,15 @@ namespace MotherJunkers
             if (VehcMat != null)
                 VehcMat.color = pColor;
         }
-    }
+
+		private void OnTriggerEnter(Collider other)
+		{
+            if (other.gameObject.name == "KillVolume")
+            {
+                KillVolumeHitEvent evt = new KillVolumeHitEvent((int)_controller);
+                Publisher.Raise<KillVolumeHitEvent>(evt);
+                Destroy(gameObject);
+            }
+		}
+	}
 }

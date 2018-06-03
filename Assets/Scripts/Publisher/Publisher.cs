@@ -61,6 +61,7 @@ public class Publisher
         AddPublisherEvent<WeaponFiredEvent>();
         AddPublisherEvent<WeaponChangedEvent>();
         AddPublisherEvent<DamageTakenEvent>();
+        AddPublisherEvent<KillVolumeHitEvent>();
     }
 
     private static void CheckLazyLoad()

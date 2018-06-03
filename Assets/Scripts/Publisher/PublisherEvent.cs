@@ -46,3 +46,13 @@ public class DamageTakenEvent : PublisherEvent
         CurrentHealth = currentHealth;
     }
 }
+
+public class KillVolumeHitEvent : PublisherEvent
+{
+    public int PlayerIndex;
+
+    public KillVolumeHitEvent(int playerIndex)
+    {
+        PlayerIndex = playerIndex;
+    }
+}

@@ -26,8 +26,11 @@ public class SmashCamera : MonoBehaviour
 
             foreach (MotherJunkers.Vehicle Vhc in Vehicles)
             {
-                numberofVehicles++;
-                v3LookAtPosition += Vhc.transform.position;
+                if (Vhc != null)
+                {
+                    numberofVehicles++;
+                    v3LookAtPosition += Vhc.transform.position;
+                }
             }
 
             v3LookAtPosition /= numberofVehicles;
