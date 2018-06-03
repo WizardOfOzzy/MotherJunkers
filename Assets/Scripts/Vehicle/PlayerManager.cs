@@ -21,10 +21,11 @@ namespace MotherJunkers
 
         }
 
-        public void AddPlayer(EController peController)
+        public void AddPlayer(EController peController, Color pColor)
         {
             Vehicle Vehc = new Vehicle();
             Vehc._controller = peController;
+            Vehc._Color = pColor;
 
             Vehicles.Add(Vehc);
 
@@ -40,6 +41,10 @@ namespace MotherJunkers
                 GameObject newgo = Instantiate(VehicleToSpawn, VSLs[i].transform);
 
                 newgo.GetComponent<Vehicle>()._controller = Vehicles[i]._controller;
+
+                newgo.GetComponent<Vehicle>().SetColor(Vehicles[i]._Color);
+
+                
             }
 
         }
