@@ -36,14 +36,14 @@ public class PlayerJoinUI : MonoBehaviour
             P2Back.gameObject.SetActive(p2ready);
         }
 
-        if (PlayerInput.Instance.GetButtonUp(EController.Controller2, !p3ready ? EControllerButton.Button_A : EControllerButton.Button_B))
+        if (PlayerInput.Instance.GetButtonUp(EController.Controller3, !p3ready ? EControllerButton.Button_A : EControllerButton.Button_B))
         {
             p3ready = !p3ready;
             P3Join.gameObject.SetActive(!p3ready);
             P3Back.gameObject.SetActive(p3ready);
         }
 
-        if (PlayerInput.Instance.GetButtonUp(EController.Controller2, !p4ready ? EControllerButton.Button_A : EControllerButton.Button_B))
+        if (PlayerInput.Instance.GetButtonUp(EController.Controller4, !p4ready ? EControllerButton.Button_A : EControllerButton.Button_B))
         {
             p4ready = !p4ready;
             P4Join.gameObject.SetActive(!p4ready);
