@@ -2,38 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmashCamera : MonoBehaviour {
-
-    VehicleMovement[] Vehicles;
-
+public class SmashCamera : MonoBehaviour 
+{
+    MotherJunkers.Vehicle[] Vehicles;
     Camera MyCamera;
-
     Vector3 v3LookAtPosition;
 
-	// Use this for initialization
-	void Start () {
 
-        Vehicles = FindObjectsOfType<VehicleMovement>();
+	public void Init(MotherJunkers.Vehicle[] vehicles)
+	{
+        Vehicles = vehicles;
         MyCamera = GetComponent<Camera>();
+	}
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        v3LookAtPosition = new Vector3(0, 0, 0);
-
-        int numberofVehicles = 0;
-
-        foreach (VehicleMovement Vhc in Vehicles)
+    // Update is called once per frame
+    void Update()
+    {
+        if (Vehicles != null && MyCamera != null)
         {
-            numberofVehicles++;
-            v3LookAtPosition += Vhc.transform.position;
+            v3LookAtPosition = new Vector3(0, 0, 0);
+
+            int numberofVehicles = 0;
+
+            foreach (MotherJunkers.Vehicle Vhc in Vehicles)
+            {
+                numberofVehicles++;
+                v3LookAtPosition += Vhc.transform.position;
+            }
+
+            v3LookAtPosition /= numberofVehicles;
+            MyCamera.transform.LookAt(v3LookAtPosition);
         }
-
-        v3LookAtPosition /= numberofVehicles;
-
-        MyCamera.transform.LookAt(v3LookAtPosition);
-
-
     }
 }

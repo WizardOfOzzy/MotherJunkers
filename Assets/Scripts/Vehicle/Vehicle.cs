@@ -36,11 +36,9 @@ namespace MotherJunkers
         public void SetColor(Color pColor)
         {
             _Color = pColor;
-
-           Material VehcMat = GetComponent<Material>();
-
-            VehcMat.color = pColor;
-
+            Material VehcMat = GetComponent<Material>();
+            if (VehcMat != null)
+                VehcMat.color = pColor;
         }
     }
 }

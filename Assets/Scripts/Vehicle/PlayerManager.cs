@@ -6,47 +6,48 @@ namespace MotherJunkers
 {
     public class PlayerManager : MonoBehaviour
     {
-        public List<Vehicle> Vehicles;
+        public struct PlayerTuple
+        {
+            public EController controller;
+            public Color color;
+        }
+
+        public List<PlayerTuple> Players;
 
         public GameObject VehicleToSpawn;
 
-        // Use this for initialization
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void AddPlayer(EController peController, Color pColor)
         {
-            Vehicle Vehc = new Vehicle();
-            Vehc._controller = peController;
-            Vehc._Color = pColor;
+            if (Players == null)
+            {
+                Players = new List<PlayerTuple>();
+            }
 
-            Vehicles.Add(Vehc);
-
+            PlayerTuple tuple = new PlayerTuple();
+            tuple.controller = peController;
+            tuple.color = pColor;
+            Players.Add(tuple);
         }
-
 
         public void SpawnAllPlayers()
         {
-            VehicleSpawnLocation [] VSLs = FindObjectsOfType<VehicleSpawnLocation>();
+            VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
+            Vehicle[] vehicles = new Vehicle[Players.Count];
 
-            for(int i = 0; i < Vehicles.Count; ++i)
+            for(int i = 0; i < Players.Count; ++i)
             {
-                GameObject newgo = Instantiate(VehicleToSpawn, VSLs[i].transform);
+                GameObject go = Instantiate(VehicleToSpawn);
+                go.transform.position = spawnLocs[i].transform.position;
 
-                newgo.GetComponent<Vehicle>()._controller = Vehicles[i]._controller;
+                Vehicle vehicle = go.GetComponent<Vehicle>();
+                vehicle._controller = Players[i].controller;
+                vehicle.SetColor(Players[i].color);
 
-                newgo.GetComponent<Vehicle>().SetColor(Vehicles[i]._Color);
-
-                
+                vehicles[i] = vehicle;
             }
 
+            SmashCamera smashCamera = FindObjectOfType<SmashCamera>();
+            smashCamera.Init(vehicles);
         }
     }
 }
