@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
-    List<GameObject> pickups = new List<GameObject>();
+    private readonly List<GameObject> pickups = new List<GameObject>();
    
     #region Mono
 
-    void Awake()
+    private void Awake()
     {
         int locationCount = SpawnLocations.transform.childCount;
         for (int i = 0; i < locationCount; i++)
@@ -19,21 +17,17 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
-    public int spawnCount = 20;
-    public float interval = 10000f;
-    bool ready = false;
-    
-    void Start()
+    private void Start()
     {
         InvokeRepeating("SpawnRandom", 1f, 10f); 
     }
 
-    void SpawnRandom() {
+    private void SpawnRandom() {
        Spawn(PickupType.weapon);
     }
 
 	// Update is called once per frame
-	void Update () {
+    private void Update () {
 		if (Input.GetKeyUp(KeyCode.K))
         {
             SpawnRandom();
@@ -47,7 +41,6 @@ public class SpawnManager : MonoBehaviour {
     public GameObject PowerupPrefab;
     public static List<Location> locations = new List<Location>();
     public GameObject SpawnLocations;
-    public bool isBoost = true;
     #endregion
 
     #region Public Methods
@@ -58,17 +51,17 @@ public class SpawnManager : MonoBehaviour {
         
         if (!foundLocation.Equals(default(Location)))
         {
-            if (someType == PickupType.weapon)
+            switch (someType)
             {
-                selectedPrefab = WeaponPrefab;
-            }
-            else if (someType == PickupType.boost)
-            {
-                selectedPrefab = BoostPrefab;
-            }
-            else if (someType == PickupType.powerup)
-            {
-                selectedPrefab = PowerupPrefab;
+                case PickupType.weapon:
+                    selectedPrefab = WeaponPrefab;
+                    break;
+                case PickupType.boost:
+                    selectedPrefab = BoostPrefab;
+                    break;
+                case PickupType.powerup:
+                    selectedPrefab = PowerupPrefab;
+                    break;
             }
 
             GameObject newPickup = Instantiate(selectedPrefab);
@@ -86,10 +79,9 @@ public class SpawnManager : MonoBehaviour {
     public static void FreeLocation(Location loc)
     {
         int someLocation = locations.FindLastIndex(s => s.Equals(loc));
-        Location locationToFree;
         if (someLocation != -1)
         {
-            locationToFree = locations[someLocation];
+            Location locationToFree = locations[someLocation];
             locationToFree.available = true;
 
             locations.RemoveAt(someLocation);
@@ -118,7 +110,7 @@ public class SpawnManager : MonoBehaviour {
         }
         else
         {
-            UnityEngine.Debug.Log("No spawn positions found!!");
+            Debug.Log("No spawn positions found!!");
         }
 
         return availableLocation;

@@ -40,6 +40,17 @@ public class Weapon : Item
         get { return CurrentAmmo; }
     }
 
+    protected virtual void Start()
+    {
+        CurrentAmmo = MaxAmmo;
+
+        Vehicle vehicle = GetComponentInParent<Vehicle>();
+        if (vehicle)
+        {
+            _playerIndex = vehicle._controller;
+        }
+    }
+
     public bool TryFireWeapon()
     {
         bool didFire = CanFire(); 
@@ -74,11 +85,7 @@ public class Weapon : Item
         }
         return result;
     }
-	protected virtual void Start()
-	{
-        // Init
-        CurrentAmmo = MaxAmmo;
-	}
+
     public virtual void OnFirePressed()
     {
 

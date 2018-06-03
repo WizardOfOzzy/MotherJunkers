@@ -79,7 +79,7 @@ public class PlayerInput : Singleton<PlayerInput>
 
     public float GetAxis(EController controller, EControllerAxis axis)
     {
-        return Input.GetAxis(_axisLookup[axis] + (int)controller);
+        return Input.GetAxisRaw(_axisLookup[axis] + (int)controller);
     }
 
     public bool GetButtonDown(EController controller, EControllerButton button)

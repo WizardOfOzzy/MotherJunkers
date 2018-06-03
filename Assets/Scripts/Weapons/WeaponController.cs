@@ -116,7 +116,9 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
+        _playerIndex = GetComponentInParent<Vehicle>()._controller;
         InitMachineGun();
+        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
     }
 
     public void Update()

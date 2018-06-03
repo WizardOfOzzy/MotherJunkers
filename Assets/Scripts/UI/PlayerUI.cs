@@ -40,6 +40,7 @@ public class PlayerUI : MonoBehaviour
 
     private void OnWeaponChangedEvent(WeaponChangedEvent e)
     {
+        Debug.Log(e.PlayerIndex + " " + e.Weapon.Name);
         if (e.PlayerIndex == PlayerIndex)
         {
             AmmoUI.SetMaxAmmoSize(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Max_Ammo);
