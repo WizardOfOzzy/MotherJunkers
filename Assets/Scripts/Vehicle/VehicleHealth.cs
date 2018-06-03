@@ -19,7 +19,7 @@ public class VehicleHealth : MonoBehaviour {
 
     public void TakeDamage(float pDamage)
     {
-        Health -= pDamage;
+        Health += pDamage;
 
         DamageTakenEvent evt = new DamageTakenEvent((int)GetComponent<Vehicle>()._controller, Health);
         Publisher.Raise<DamageTakenEvent>(evt);

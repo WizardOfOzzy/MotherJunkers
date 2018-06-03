@@ -29,5 +29,9 @@ public class MGprojectile : Poolable {
     private void OnTriggerEnter(Collider other)
     {
         MachineGunPool.Instance.ReturnProjectile(this);
+        if (other.GetComponent<VehicleHealth>())
+        {
+            other.GetComponent<VehicleHealth>().TakeDamage(1);
+        }
     }
 }
