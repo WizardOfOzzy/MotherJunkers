@@ -20,7 +20,7 @@ public class GameStateManager : MonoBehaviour
         GameState = EGameState.MainMenu;
         MainMenuUI.gameObject.SetActive(true);
         JoinScreenUI.gameObject.SetActive(false);
-        //PlayerUI.gameObject.SetActive(false);
+        PlayerUI.gameObject.SetActive(false);
     }
 
     private void Update()

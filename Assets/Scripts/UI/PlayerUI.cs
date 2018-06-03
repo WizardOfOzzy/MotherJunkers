@@ -44,4 +44,23 @@ public class PlayerUI : MonoBehaviour
             AmmoUI.SetColor(PlayerColor);
         }
     }
+
+    private void OnEnable()
+    {
+        bool isEnable = false;
+        PlayerManager _playerManager = FindObjectOfType<PlayerManager>();
+        if (_playerManager)
+        {
+            for (int i = 1; i <= _playerManager.Players.Count; i++)
+            {
+                if (i == (int) PlayerIndex)
+                {
+                    isEnable = true;
+                    break;
+                }
+            }
+        }
+
+        gameObject.SetActive(isEnable);
+    }
 }
