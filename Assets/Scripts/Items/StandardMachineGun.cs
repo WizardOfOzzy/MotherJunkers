@@ -10,12 +10,13 @@ public class StandardMachineGun : Weapon {
     {
         base.Start();
         fireRate = 1 / ShotsPerSecond ;
-        fireTrack = fireRate;
+        fireTrack = -1;
     }
     protected override void FireWeapon()
     {
         //base.FireWeapon();
         MachineGunPool.Instance.SpawnProjectile(spawnPoint.position + Random.onUnitSphere * offset, spawnPoint.rotation);
+        fireTrack = fireRate;
     }
     protected override bool CanFire()
     {
@@ -26,8 +27,19 @@ public class StandardMachineGun : Weapon {
     void Update()
     {
         if (fireTrack > 0)
+        {
             fireTrack -= Time.deltaTime;
-        
+            if (!_audioSource.isPlaying)
+            {
+                Debug.Log("DERP");
+                _audioSource.Play();
+            }
+        }
+        else
+        {
+            _audioSource.Stop();
+            _audioSource.time = 0;
+        }
         if (Input.GetKey(KeyCode.Space))
         {
             TryFireWeapon();
