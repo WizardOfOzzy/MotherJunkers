@@ -16,7 +16,12 @@ namespace MotherJunkers
 
         public GameObject VehicleToSpawn;
 
-        public void AddPlayer(EController peController, Color pColor)
+		private void Awake()
+		{
+            Players = new List<PlayerTuple>();
+		}
+
+		public void AddPlayer(EController peController, Color pColor)
         {
             if (Players == null)
             {

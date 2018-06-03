@@ -83,4 +83,16 @@ public class Weapon : Item
         // Init
         CurrentAmmo = MaxAmmo;
 	}
+    public virtual void OnFirePressed()
+    {
+
+    }
+    public virtual void OnFireHeld()
+    {
+
+    }
+    public virtual void OnFireReleased()
+    {
+
+    }
 }

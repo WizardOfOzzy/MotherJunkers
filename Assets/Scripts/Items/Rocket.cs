@@ -24,17 +24,16 @@ public class Rocket : Weapon
             _shotTimer = TimeBetweenShots;
         }
     }
-
+    public override void OnFirePressed()
+    {
+        base.OnFirePressed();
+        TryFireWeapon();
+    }
     void Update()
     {
         if (_shotTimer > 0f)
         {
             _shotTimer -= Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryFireWeapon();
         }
     }
 }
