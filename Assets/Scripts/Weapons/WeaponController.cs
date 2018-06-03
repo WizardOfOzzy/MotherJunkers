@@ -18,13 +18,25 @@ public class WeaponController : MonoBehaviour
     private int _activeWeaponIdx;
 
     // TODO - get this from a separate component
-    public int _playerIndex = 0;
-
-
+    public EController _playerIndex
+    {
+        get
+        {
+            Vehicle vehicle = GetComponent<Vehicle>();
+            if (vehicle != null)
+            {
+                return vehicle._controller;
+            }
+            else
+            {
+                return EController.Controller1;
+            }
+        }
+    }
 
     public void AttachWeapon(Weapon weapon)
     {
-        weapon._playerIndex = _playerIndex;
+        weapon._playerIndex = (int)_playerIndex;
         if (_specialWeapon != null)
         {
             DestroyWeapon(_specialWeapon);
@@ -61,7 +73,7 @@ public class WeaponController : MonoBehaviour
         bool didFire = _activeWeapon.TryFireWeapon();
         if (didFire)
         {
-            Publisher.Raise(new WeaponFiredEvent(_playerIndex, _activeWeapon));
+            Publisher.Raise(new WeaponFiredEvent((int)_playerIndex, _activeWeapon));
         }
     }
 
@@ -93,7 +105,7 @@ public class WeaponController : MonoBehaviour
     private void EnableWeapon(int weaponIdx)
     {
         _weapons[weaponIdx].gameObject.SetActive(true);
-        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
+        Publisher.Raise(new WeaponChangedEvent((int)_playerIndex, _activeWeapon));
     }
 
     private void DisableWeapon(int weaponIdx)
@@ -122,7 +134,7 @@ public class WeaponController : MonoBehaviour
         }
     }
     float prevAxisValue;
-    float axisThreshold = .25f;
+    float axisThreshold = .10f;
     private void Awake()
     {
         _weapons = new Weapon[MAX_WEAPONS];
@@ -134,7 +146,7 @@ public class WeaponController : MonoBehaviour
     }
     public void Update()
     {
-        float currentAxisValue = Mathf.Abs(PlayerInput.Instance.GetAxis((EController)_playerIndex+1, EControllerAxis.Trigger));
+        float currentAxisValue = PlayerInput.Instance.GetAxis(_playerIndex, EControllerAxis.RightTrigger);
 
         if (prevAxisValue < axisThreshold && currentAxisValue >= axisThreshold)
         {
@@ -148,21 +160,25 @@ public class WeaponController : MonoBehaviour
         {
             OnFireReleased();
         }
+        
         prevAxisValue = currentAxisValue;
     }
 
     public void OnFirePressed()
     {
         _activeWeapon.OnFirePressed();
-        }
+    }
+
     public void OnFireHeld()
     {
         _activeWeapon.OnFireHeld();
     }
+
     public void OnFireReleased()
     {
         _activeWeapon.OnFireReleased();
     }
+
     private void InitMachineGun()
     {
         _weapons[0] = Instantiate(_machineGunPrefab).GetComponent<Weapon>();

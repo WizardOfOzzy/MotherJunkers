@@ -8,7 +8,8 @@ public enum EControllerAxis
     LeftVertical,
     RightHorizontal,
     RightVertical,
-    Trigger,
+    LeftTrigger,
+    RightTrigger,
     DPadHorizontal,
     DPadVertical,
 }
@@ -71,7 +72,8 @@ public class PlayerInput : Singleton<PlayerInput>
             {EControllerAxis.LeftVertical, "LeftVertical_" },
             {EControllerAxis.RightHorizontal, "RightHorizontal_" },
             {EControllerAxis.RightVertical, "RightVertical_" },
-            {EControllerAxis.Trigger, "Trigger_" },
+            {EControllerAxis.LeftTrigger, "LeftTrigger_" },
+            {EControllerAxis.RightTrigger, "RightTrigger_" },
             {EControllerAxis.DPadHorizontal, "DPadHorizontal_" },
             {EControllerAxis.DPadVertical, "DPadVertical_" },
         };
