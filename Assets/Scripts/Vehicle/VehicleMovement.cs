@@ -8,16 +8,16 @@ public class VehicleMovement : MonoBehaviour
     Rigidbody _RigidBody;
 
     [SerializeField]
-    float _ForceMultiplier = 10000.0F;
+    float _ForceMultiplier = 7500.0F;
 
     [SerializeField]
     float _MaxVelocity = 100.0F;
 
     [SerializeField]
-    float _TurningForce = 100.0F;
+    float _TurningForce = 80.0F;
 
     [SerializeField]
-    float _MaxAngularVelocity = 100.0F;
+    float _MaxAngularVelocity = 200.0F;
 
     Vector2 _InputDirection;
 
@@ -31,10 +31,10 @@ public class VehicleMovement : MonoBehaviour
     void Update()
     {
         // Apply steering
-        ApplyTurningForce(transform.up * -_InputDirection.x, _TurningForce);
+        ApplyTurningForce(transform.up * _InputDirection.x, _TurningForce);
 
         // Apply forward movement
-        ApplyForce(transform.forward * _InputDirection.y, _ForceMultiplier);
+        ApplyForce(transform.right * -_InputDirection.y, _ForceMultiplier);
 
         // Truncate velocity
         if (_RigidBody.velocity.magnitude > _MaxVelocity)
