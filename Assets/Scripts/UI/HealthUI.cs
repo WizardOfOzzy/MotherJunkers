@@ -12,17 +12,19 @@ public class HealthUI : MonoBehaviour
 
     private const float UpdateSpeed = 0.1f;
     private const float ShakeDuration = 0.1f;
-    public float ShakeStrength = 100.0f;
-    public int Vibration = 100;
+    private readonly Vector3 ShakeStrength = new Vector3(10, 10, 0);
+    private const int ShakeVibration = 50;
 
     private readonly Gradient _gradient = new Gradient { mode = GradientMode.Blend };
-   
+
+    private Vector3 healthPosition;
+
     private void Start()
     {
         GradientColorKey[] colorKeys = new GradientColorKey[4];
         colorKeys[0] = new GradientColorKey(Color.white, 0.0f);
-        colorKeys[1] = new GradientColorKey(Color.yellow, 0.0f);
-        colorKeys[2] = new GradientColorKey(new Color(1, 127 / 255.0f, 80 / 255.0f), 0.5f);
+        colorKeys[1] = new GradientColorKey(Color.yellow, 0.33f);
+        colorKeys[2] = new GradientColorKey(new Color(1, 127 / 255.0f, 80 / 255.0f), 0.66f);
         colorKeys[3] = new GradientColorKey(Color.red, 1.0f);
 
         GradientAlphaKey[] alphaKeys = new GradientAlphaKey[4];
@@ -32,6 +34,9 @@ public class HealthUI : MonoBehaviour
         }
 
         _gradient.SetKeys(colorKeys, alphaKeys);
+
+        healthPosition = Health.transform.localPosition;
+        Debug.Log(healthPosition);
     }
 
     public void SetHealth(int health)
@@ -39,7 +44,7 @@ public class HealthUI : MonoBehaviour
         _health = health;
 
         SetColor();
-        Shake();
+        //Shake();
         Health.DOText(_health.ToString(), UpdateSpeed, false, ScrambleMode.Numerals);
     }
 
@@ -51,12 +56,15 @@ public class HealthUI : MonoBehaviour
 
     private void Shake()
     {
-        Vector3 position = Health.transform.localPosition;
+        Health.transform.DOKill();
 
-        Health.transform.DOShakePosition(ShakeDuration, ShakeStrength, Vibration, 90, false, true).OnComplete(() =>
+        Health.transform.DOShakePosition(ShakeDuration, ShakeStrength, ShakeVibration).OnComplete(() =>
             {
-                Health.transform.localPosition = position;
-            });
+                Health.rectTransform.localPosition = healthPosition;
+            }).OnKill(() =>
+        {
+            Health.rectTransform.localPosition = healthPosition;
+        });
     }
     private void Update()
     {

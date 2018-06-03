@@ -15,9 +15,6 @@ public class PlayerUI : MonoBehaviour
         Publisher.Subscribe<WeaponFiredEvent>(OnWeaponFiredEvent);
         Publisher.Subscribe<DamageTakenEvent>(OnDamageTakenEvent);
 
-        //AmmoUI.SetMaxAmmoSize(Random.Range(-1, 20));
-        //AmmoUI.SetAmmoCount(2);
-
         PlayerColor = GameStateManager.GetPlayerColor(PlayerIndex);
         AmmoUI.SetColor(PlayerColor);
     }
@@ -40,10 +37,11 @@ public class PlayerUI : MonoBehaviour
 
     private void OnWeaponChangedEvent(WeaponChangedEvent e)
     {
-        Debug.Log(e.PlayerIndex + " " + e.Weapon.Name);
         if (e.PlayerIndex == PlayerIndex)
         {
             AmmoUI.SetMaxAmmoSize(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Max_Ammo);
+            PlayerColor = GameStateManager.GetPlayerColor(PlayerIndex);
+            AmmoUI.SetColor(PlayerColor);
         }
     }
 }

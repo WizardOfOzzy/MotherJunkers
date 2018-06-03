@@ -17,21 +17,14 @@ public class WeaponController : MonoBehaviour
     {
         get
         {
-            Vehicle vehicle = GetComponent<Vehicle>();
-            if (vehicle != null)
-            {
-                return vehicle._controller;
-            }
-            else
-            {
-                return EController.Controller1;
-            }
+            Vehicle vehicle = GetComponentInParent<Vehicle>();
+            return vehicle != null ? vehicle._controller : EController.Controller1;
         }
     }
 
     public void AttachWeapon(Weapon weapon)
     {
-        weapon._playerIndex = (int)_playerIndex;
+        weapon._playerIndex = _playerIndex;
         if (_specialWeapon != null)
         {
             DestroyWeapon(_specialWeapon);
@@ -69,7 +62,8 @@ public class WeaponController : MonoBehaviour
         bool didFire = _activeWeapon.TryFireWeapon();
         if (didFire)
         {
-            Publisher.Raise(new WeaponFiredEvent((int)_playerIndex, _activeWeapon));
+            Debug.Log(_playerIndex);
+            Publisher.Raise(new WeaponFiredEvent(_playerIndex, _activeWeapon));
         }
     }
 
@@ -101,7 +95,7 @@ public class WeaponController : MonoBehaviour
     private void EnableWeapon(int weaponIdx)
     {
         _weapons[weaponIdx].gameObject.SetActive(true);
-        Publisher.Raise(new WeaponChangedEvent((int)_playerIndex, _activeWeapon));
+        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
     }
 
     private void DisableWeapon(int weaponIdx)
@@ -120,8 +114,10 @@ public class WeaponController : MonoBehaviour
         get { return _weapons[1]; }
         set { _weapons[1] = value; }
     }
-    float prevAxisValue;
-    float axisThreshold = .10f;
+
+    private float prevAxisValue;
+    private const float axisThreshold = .10f;
+
     private void Awake()
     {
         _weapons = new Weapon[MAX_WEAPONS];
@@ -130,7 +126,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         InitMachineGun();
-        Publisher.Raise(new WeaponChangedEvent((int)_playerIndex, _activeWeapon));
+        Publisher.Raise(new WeaponChangedEvent(_playerIndex, _activeWeapon));
     }
 
     public void Update()
