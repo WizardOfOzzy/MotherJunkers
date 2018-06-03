@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4995836618091722}
   - component: {fileID: 33437166765463172}
   - component: {fileID: 23600086461001804}
-  - component: {fileID: 135567082244871724}
   - component: {fileID: 96930248375999704}
   - component: {fileID: 54077788615051076}
   - component: {fileID: 114415732500002580}
+  - component: {fileID: 65360142831630756}
   m_Layer: 0
   m_Name: Machine Gun Bullet
   m_TagString: Untagged
@@ -102,6 +102,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65360142831630756
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268200877860396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3, y: 8, z: 2.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &96930248375999704
 TrailRenderer:
   serializedVersion: 2
@@ -222,15 +234,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595066b518ff94ba4b880c07ca8cc25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135567082244871724
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268200877860396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}

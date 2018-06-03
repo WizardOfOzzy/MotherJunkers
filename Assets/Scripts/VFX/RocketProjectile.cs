@@ -20,6 +20,11 @@ public class RocketProjectile : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetComponent<VehicleHealth>())
+        {
+            other.GetComponent<VehicleHealth>().TakeDamage(10);
+            other.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+        }
         Destroy(this.gameObject);
     }
 
