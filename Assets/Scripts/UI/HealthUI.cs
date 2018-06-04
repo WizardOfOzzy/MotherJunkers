@@ -10,7 +10,7 @@ public class HealthUI : MonoBehaviour
     private int _health;
     private const int MaxHealth = 200;
 
-    private const float UpdateSpeed = 0.1f;
+    private const float UpdateSpeed = 0.01f;
     private const float ShakeDuration = 0.1f;
     private readonly Vector3 ShakeStrength = new Vector3(10, 10, 0);
     private const int ShakeVibration = 50;
@@ -36,7 +36,6 @@ public class HealthUI : MonoBehaviour
         _gradient.SetKeys(colorKeys, alphaKeys);
 
         healthPosition = Health.transform.localPosition;
-        Debug.Log(healthPosition);
     }
 
     public void SetHealth(int health)

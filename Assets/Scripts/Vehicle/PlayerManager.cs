@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerManager : MonoBehaviour
 {
@@ -27,9 +25,11 @@ public class PlayerManager : MonoBehaviour
             Players = new List<PlayerTuple>();
         }
 
-        PlayerTuple tuple = new PlayerTuple();
-        tuple.controller = peController;
-        tuple.color = pColor;
+        PlayerTuple tuple = new PlayerTuple
+        {
+            controller = peController,
+            color = pColor
+        };
         Players.Add(tuple);
     }
 
@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
     {
         VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
         Vehicle[] vehicles = new Vehicle[Players.Count];
+        List<Transform> transforms = new List<Transform>();
 
         for(int i = 0; i < Players.Count; ++i)
         {
@@ -48,10 +49,13 @@ public class PlayerManager : MonoBehaviour
             vehicle.SetColor(Players[i].color);
 
             vehicles[i] = vehicle;
+            transforms.Add(vehicle.transform);
         }
 
         SmashCamera smashCamera = FindObjectOfType<SmashCamera>();
-        smashCamera.Init(vehicles);
+        smashCamera.Init(transforms);
     }
 }
+
+
 
