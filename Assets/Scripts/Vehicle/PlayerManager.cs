@@ -54,6 +54,10 @@ public class PlayerManager : MonoBehaviour
 
         SmashCamera smashCamera = FindObjectOfType<SmashCamera>();
         smashCamera.Init(transforms);
+
+        ZoomCamera zoomCamera = FindObjectOfType<ZoomCamera>();
+        if(zoomCamera!=null)
+        zoomCamera.Init(transforms);
     }
 }
 

@@ -2275,6 +2275,18 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9c3bb381ed59ad343bcd94b175af0865, type: 2}
+    - target: {fileID: 400000, guid: 8528e80e03c9442bcbc65107b89d292e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 18138.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8528e80e03c9442bcbc65107b89d292e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 18138.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8528e80e03c9442bcbc65107b89d292e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 18138.19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8528e80e03c9442bcbc65107b89d292e, type: 3}
   m_IsPrefabParent: 0
@@ -6099,6 +6111,7 @@ GameObject:
   - component: {fileID: 1678367415}
   - component: {fileID: 1678367414}
   - component: {fileID: 1678367418}
+  - component: {fileID: 1678367419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6185,6 +6198,21 @@ MonoBehaviour:
   MinFieldOfField: 30
   MaxFieldOfField: 15
   FieldOfViewLimit: 20
+--- !u!114 &1678367419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1678367413}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06385313c7c2f0842bbfbf135f952d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultOffset: {x: 5, y: 5, z: 0}
+  smoothMove: 1
+  distanceRatio: 2.5
+  maxDistance: 7
 --- !u!1001 &1704065888
 Prefab:
   m_ObjectHideFlags: 0
