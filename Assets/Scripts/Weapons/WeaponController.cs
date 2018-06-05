@@ -62,7 +62,6 @@ public class WeaponController : MonoBehaviour
         bool didFire = _activeWeapon.TryFireWeapon();
         if (didFire)
         {
-            Debug.Log(_playerIndex);
             Publisher.Raise(new WeaponFiredEvent(_playerIndex, _activeWeapon));
         }
     }

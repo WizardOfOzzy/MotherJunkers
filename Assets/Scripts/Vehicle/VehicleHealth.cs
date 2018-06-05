@@ -20,7 +20,16 @@ public class VehicleHealth : MonoBehaviour
     public void UpdateStock()
     {
         Stock -= 1;
-        FindObjectOfType<PlayerUI>().StockUI.SetStockAmmount(Stock);
+
+        PlayerUI[] playerUis = FindObjectsOfType<PlayerUI>();
+        foreach (PlayerUI playerUi in playerUis)
+        {
+            if (playerUi.PlayerIndex == GetComponent<Vehicle>()._controller)
+            {
+                playerUi.StockUI.SetStockAmmount(Stock);
+                break;
+            }
+        }
     }
 
 }

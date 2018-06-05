@@ -65,8 +65,15 @@ public class PlayerManager : MonoBehaviour
 
     public void RespawnPlayer(Vehicle vehicle)
     {
-        VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
-        vehicle.transform.position = spawnLocs[Random.Range(0, spawnLocs.Length - 1)].transform.position;
+        Vector3 position = Random.insideUnitSphere * 20;
+        position.y = 0.0f;
+
+        while (Physics.CheckSphere(position, 1))
+        {
+            position = Random.insideUnitSphere * 20;
+        }
+
+        vehicle.transform.position = position;
     }
 
     private void OnKillVolumeHitEvent(KillVolumeHitEvent e)
