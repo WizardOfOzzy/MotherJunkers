@@ -5,8 +5,7 @@
 public class Vehicle : MonoBehaviour
 {
     public EController _controller;
-
-    public Color _Color;
+    public SkinnedMeshRenderer[] Meshes;
 
     private VehicleMovement _movement;
 
@@ -39,18 +38,17 @@ public class Vehicle : MonoBehaviour
 
     public void SetColor(Color pColor)
     {
-        _Color = pColor;
-        Material VehcMat = GetComponent<Material>();
-        if (VehcMat != null)
-            VehcMat.color = pColor;
+        foreach (SkinnedMeshRenderer mesh in Meshes)
+        {
+            mesh.material.color = pColor;
+        }
     }
 
 	private void OnTriggerEnter(Collider other)
 	{
         if (other.gameObject.name == "KillVolume")
         {
-            Publisher.Raise(new KillVolumeHitEvent(_controller));
-            Destroy(gameObject);
+            Publisher.Raise(new KillVolumeHitEvent(_controller, this));
         }
 	}
 }

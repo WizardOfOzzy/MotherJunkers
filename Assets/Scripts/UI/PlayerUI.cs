@@ -53,7 +53,7 @@ public class PlayerUI : MonoBehaviour
         {
             for (int i = 0; i < _playerManager.Players.Count; i++)
             {
-                if ((int)_playerManager.Players[i].controller == (int) PlayerIndex)
+                if ((int) _playerManager.Players[i].controller == (int) PlayerIndex)
                 {
                     isEnable = true;
                     break;

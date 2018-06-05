@@ -198,7 +198,6 @@ MonoBehaviour:
   _machineGunPrefab: {fileID: 1772494627662246, guid: 24ca9a7f46d4f452d9927342b22612cc,
     type: 2}
   _activeWeaponIdx: 0
-  _playerIndex: 1
 --- !u!114 &114763225823082506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,6 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: 1
   _Color: {r: 1, g: 0, b: 0, a: 0}
+  Meshes:
+  - {fileID: 137092596937640324}
 --- !u!114 &114981632391235474
 MonoBehaviour:
   m_ObjectHideFlags: 1

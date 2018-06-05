@@ -47,9 +47,11 @@ public class DamageTakenEvent : PublisherEvent
 public class KillVolumeHitEvent : PublisherEvent
 {
     public EController PlayerIndex;
+    public Vehicle Vehicle;
 
-    public KillVolumeHitEvent(EController playerIndex)
+    public KillVolumeHitEvent(EController playerIndex, Vehicle vehicle)
     {
         PlayerIndex = playerIndex;
+        Vehicle = vehicle;
     }
 }

@@ -12,13 +12,15 @@ public class PlayerManager : MonoBehaviour
     public List<PlayerTuple> Players;
 
     public GameObject VehicleToSpawn;
+    private Vehicle[] vehicles;
 
-	private void Awake()
+    private void Awake()
 	{
         Players = new List<PlayerTuple>();
+        Publisher.Subscribe<KillVolumeHitEvent>(OnKillVolumeHitEvent);
 	}
 
-	public void AddPlayer(EController peController, Color pColor)
+    public void AddPlayer(EController peController, Color pColor)
     {
         if (Players == null)
         {
@@ -36,7 +38,8 @@ public class PlayerManager : MonoBehaviour
     public void SpawnAllPlayers()
     {
         VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
-        Vehicle[] vehicles = new Vehicle[Players.Count];
+        vehicles = new Vehicle[Players.Count];
+
         List<Transform> transforms = new List<Transform>();
 
         for(int i = 0; i < Players.Count; ++i)
@@ -58,6 +61,35 @@ public class PlayerManager : MonoBehaviour
         ZoomCamera zoomCamera = FindObjectOfType<ZoomCamera>();
         if(zoomCamera!=null)
         zoomCamera.Init(transforms);
+    }
+
+    public void RespawnPlayer(Vehicle vehicle)
+    {
+        VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
+        vehicle.transform.position = spawnLocs[Random.Range(0, spawnLocs.Length - 1)].transform.position;
+    }
+
+    private void OnKillVolumeHitEvent(KillVolumeHitEvent e)
+    {
+        foreach (Vehicle v in vehicles)
+        {
+            if (e.PlayerIndex == v._controller)
+            {
+                VehicleHealth health = v.GetComponent<VehicleHealth>();
+                health.UpdateStock();
+
+                if (health.Stock > 0)
+                {
+                    RespawnPlayer(v);
+                }
+                else
+                {
+                    e.Vehicle.gameObject.SetActive(false);
+                }
+
+                break;
+            }
+        }
     }
 }
 
