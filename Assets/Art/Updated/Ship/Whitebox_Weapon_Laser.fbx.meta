@@ -38,7 +38,12 @@ ModelImporter:
     4300006: Cables3_low
     4300008: Cables4_low
     4300010: Body1_low
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship_MAT
+    second: {fileID: 2100000, guid: ff0fe003adc734344a8ff1313f51f613, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

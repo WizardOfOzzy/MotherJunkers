@@ -28,7 +28,12 @@ ModelImporter:
     4300002: FireBarrels02_low
     4300004: Tubes1_low
     4300006: Base1_low
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship_MAT
+    second: {fileID: 2100000, guid: 2eb67735ca912e549b33312edc49e345, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
