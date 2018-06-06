@@ -83,7 +83,12 @@ ModelImporter:
     4300024: BulletJacket_low4
     4300026: BulletJacket_low5
     4300028: BulletCase_low5
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship_MAT
+    second: {fileID: 2100000, guid: dffc4ec3d38fbf140ba1cf5710a4ab12, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
