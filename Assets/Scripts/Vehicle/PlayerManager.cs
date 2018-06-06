@@ -27,6 +27,16 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(EController controller)
     {
+        if (Players == null) return;
+
+        foreach (PlayerTuple player in Players)
+        {
+            if (player.controller == controller)
+            {
+                return;
+            }
+        }
+    
         PlayerTuple tuple = new PlayerTuple
         {
             controller = controller,

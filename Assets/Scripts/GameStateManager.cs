@@ -14,6 +14,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject PlayerUI;
 
     public EGameState GameState = EGameState.MainMenu;
+    private PlayerManager _playerManager;
 
     private void Start()
     {
@@ -53,7 +54,7 @@ public class GameStateManager : MonoBehaviour
     {
         CheckForPlayerJoin();
 
-        if (_playerManager.Players.Count >= 1)
+        if (_playerManager.Players.Count > 1)
         {
             if (CheckForStart())
             {
@@ -80,49 +81,19 @@ public class GameStateManager : MonoBehaviour
 
         for (int i = 1; i <= 4; i++)
         {
-            EController player = (EController)i;
+            EController player = (EController) i;
             if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_A))
             {
-                bool shouldAdd = true;
-                for (int j = 0; j < _playerManager.Players.Count; j++)
-                {
-                    if (_playerManager.Players[j].controller == player)
-                    {
-                        shouldAdd = false;
-                        break;
-                    }
-                }
-
-                if (shouldAdd)
-                {
-                    _playerManager.AddPlayer(player);
-                }
+                _playerManager.AddPlayer(player);
             }
 
             if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_B))
             {
-                bool shouldRemove = true;
-                for (int j = 0; j < _playerManager.Players.Count; j++)
-                {
-                    if (_playerManager.Players[j].controller == player)
-                    {
-                        shouldRemove = false;
-                        break;
-                    }
-                }
-
-                if (shouldRemove)
-                {
-                    _playerManager.RemovePlayer(player);
-                }
+                _playerManager.RemovePlayer(player);
             }
         }
-
     }
 
-
-
-    private PlayerManager _playerManager;
 
     private bool CheckForStart()
     {

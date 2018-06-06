@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemController : MonoBehaviour 
-
 {
     [SerializeField]
     private WeaponController _weaponController;
 
     private void OnTriggerEnter(Collider other)
     {
-        
         Pickup pickup = other.GetComponent<Pickup>();
 
         if (pickup != null)
@@ -22,17 +18,22 @@ public class ItemController : MonoBehaviour
     }
 
 	private void AddPickup(Item item)
-    {
-        // Embrace the jank
-        if (item is Weapon)
+	{
+	    // Embrace the jank
+	    Weapon weapon = item as Weapon;
+	    if (weapon != null)
         {
-            AddWeapon(item as Weapon);
+            AddWeapon(weapon);
         }
-        else if (item is BoostItem)
-        {
-            AddBoost(item as BoostItem);
-        }
-    }
+        else
+	    {
+	        BoostItem boostItem = item as BoostItem;
+	        if (boostItem != null)
+	        {
+	            AddBoost(boostItem);
+	        }
+	    }
+	}
 
     private void AddWeapon(Weapon weapon)
     {
