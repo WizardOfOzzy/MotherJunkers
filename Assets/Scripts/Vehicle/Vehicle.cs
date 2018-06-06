@@ -6,6 +6,7 @@ public class Vehicle : MonoBehaviour
 {
     public EController _controller;
     public SkinnedMeshRenderer[] Meshes;
+    public Material[] Materials;
 
     private VehicleMovement _movement;
 
@@ -36,13 +37,12 @@ public class Vehicle : MonoBehaviour
         }
     }
 
-    public void SetColor(Color pColor)
+    public void SetColor(EController controller)
     {
-        // CBO - have it set the specific material instead
-        //foreach (SkinnedMeshRenderer mesh in Meshes)
-        //{
-        //    mesh.material.color = pColor;
-        //}
+        foreach (SkinnedMeshRenderer mesh in Meshes)
+        {
+            mesh.material = Materials[(int)controller];
+        }
     }
 
 	private void OnTriggerEnter(Collider other)

@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
 
             Vehicle vehicle = go.GetComponent<Vehicle>();
             vehicle._controller = Players[i].controller;
-            vehicle.SetColor(Players[i].color);
+            vehicle.SetColor(vehicle._controller);
 
             vehicles[i] = vehicle;
             transforms.Add(vehicle.transform);

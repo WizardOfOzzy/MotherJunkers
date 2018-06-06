@@ -823,6 +823,11 @@ MonoBehaviour:
   _controller: 1
   Meshes:
   - {fileID: 137145580878823686}
+  Materials:
+  - {fileID: 2100000, guid: 0ae35344c9828f047ab53f09be75246f, type: 2}
+  - {fileID: 2100000, guid: 11c98dc6ffb16fc488f0478cda63ba87, type: 2}
+  - {fileID: 2100000, guid: 5f3d40972163a1e4c9322fddf5af5888, type: 2}
+  - {fileID: 2100000, guid: 3dff03d11d5c2a84c9ab64eff0354a9b, type: 2}
 --- !u!114 &114981632391235474
 MonoBehaviour:
   m_ObjectHideFlags: 1
