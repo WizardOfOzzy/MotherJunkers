@@ -95,27 +95,32 @@ public class GameStateManager : MonoBehaviour
 
                 if (shouldAdd)
                 {
-                    _playerManager.AddPlayer(player, GetPlayerColor(player));
+                    _playerManager.AddPlayer(player);
+                }
+            }
+
+            if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_B))
+            {
+                bool shouldRemove = true;
+                for (int j = 0; j < _playerManager.Players.Count; j++)
+                {
+                    if (_playerManager.Players[j].controller == player)
+                    {
+                        shouldRemove = false;
+                        break;
+                    }
+                }
+
+                if (shouldRemove)
+                {
+                    _playerManager.RemovePlayer(player);
                 }
             }
         }
 
     }
 
-    public static Color GetPlayerColor(EController player)
-    {
-        switch (player)
-        {
-            case EController.Controller1:
-                return Color.red;
-            case EController.Controller2:
-                return Color.green;
-            case EController.Controller3:
-                return Color.blue;
-            default:
-                return Color.yellow;
-        }
-    }
+
 
     private PlayerManager _playerManager;
 

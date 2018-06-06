@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
         public Color color;
     }
 
-    public List<PlayerTuple> Players;
+    public List<PlayerTuple> Players = new List<PlayerTuple>();
 
     public GameObject VehicleToSpawn;
     private Vehicle[] vehicles;
@@ -20,19 +20,33 @@ public class PlayerManager : MonoBehaviour
         Publisher.Subscribe<KillVolumeHitEvent>(OnKillVolumeHitEvent);
 	}
 
-    public void AddPlayer(EController peController, Color pColor)
+    public void ClearPlayers()
     {
-        if (Players == null)
-        {
-            Players = new List<PlayerTuple>();
-        }
+        Players.Clear();
+    }
 
+    public void AddPlayer(EController controller)
+    {
         PlayerTuple tuple = new PlayerTuple
         {
-            controller = peController,
-            color = pColor
+            controller = controller,
+            color = GetPlayerColor(controller)
         };
         Players.Add(tuple);
+    }
+
+    public void RemovePlayer(EController controller)
+    {
+        if (Players == null) return;
+
+        foreach (PlayerTuple player in Players)
+        {
+            if (player.controller == controller)
+            {
+                Players.Remove(player);
+                break;
+            }
+        }
     }
 
     public void SpawnAllPlayers()
@@ -74,6 +88,21 @@ public class PlayerManager : MonoBehaviour
         }
 
         vehicle.transform.position = position;
+    }
+
+    public static Color GetPlayerColor(EController player)
+    {
+        switch (player)
+        {
+            case EController.Controller1:
+                return Color.red;
+            case EController.Controller2:
+                return Color.green;
+            case EController.Controller3:
+                return Color.blue;
+            default:
+                return Color.yellow;
+        }
     }
 
     private void OnKillVolumeHitEvent(KillVolumeHitEvent e)

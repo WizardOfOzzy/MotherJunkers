@@ -2,7 +2,6 @@
 
 public class PlayerUI : MonoBehaviour
 {
-    public Color PlayerColor;
     public EController PlayerIndex;
 
     public HealthUI HealthUI;
@@ -15,8 +14,7 @@ public class PlayerUI : MonoBehaviour
         Publisher.Subscribe<WeaponFiredEvent>(OnWeaponFiredEvent);
         Publisher.Subscribe<DamageTakenEvent>(OnDamageTakenEvent);
 
-        PlayerColor = GameStateManager.GetPlayerColor(PlayerIndex);
-        AmmoUI.SetColor(PlayerColor);
+        AmmoUI.SetColor(PlayerManager.GetPlayerColor(PlayerIndex));
     }
 
     private void OnDamageTakenEvent(DamageTakenEvent e)
@@ -40,8 +38,7 @@ public class PlayerUI : MonoBehaviour
         if (e.PlayerIndex == PlayerIndex)
         {
             AmmoUI.SetMaxAmmoSize(e.Weapon.HasInfiniteAmmo ? -1 : (int)e.Weapon.Max_Ammo);
-            PlayerColor = GameStateManager.GetPlayerColor(PlayerIndex);
-            AmmoUI.SetColor(PlayerColor);
+            AmmoUI.SetColor(PlayerManager.GetPlayerColor(PlayerIndex));
         }
     }
 
