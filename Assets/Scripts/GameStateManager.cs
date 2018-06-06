@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -7,14 +8,16 @@ public class GameStateManager : MonoBehaviour
     {
         MainMenu,
         JoinScreen,
-        PlayScreen
+        PlayScreen,
+        WinScreen
     }
     public GameObject MainMenuUI;
     public GameObject JoinScreenUI;
     public GameObject PlayerUI;
+    public GameObject PlayerWinsUI;
 
     public EGameState GameState = EGameState.MainMenu;
-    private PlayerManager _playerManager;
+
 
     private void Start()
     {
@@ -22,6 +25,9 @@ public class GameStateManager : MonoBehaviour
         MainMenuUI.gameObject.SetActive(true);
         JoinScreenUI.gameObject.SetActive(false);
         PlayerUI.gameObject.SetActive(false);
+        PlayerWinsUI.gameObject.SetActive(false);
+
+        Publisher.Subscribe<PlayerCountEvent>(OnPlayerCountEvent);
     }
 
     private void Update()
@@ -36,6 +42,9 @@ public class GameStateManager : MonoBehaviour
                 break;
             case EGameState.PlayScreen:
                 PlayScreenState();
+                break;
+            case EGameState.WinScreen:
+                WinScreenState();
                 break;
         }
     }
@@ -54,11 +63,11 @@ public class GameStateManager : MonoBehaviour
     {
         CheckForPlayerJoin();
 
-        if (_playerManager.Players.Count > 1)
+        if (PlayerManager.Players.Count > 1)
         {
             if (CheckForStart())
             {
-                _playerManager.SpawnAllPlayers();
+                PlayerManager.SpawnAllPlayers();
                 JoinScreenUI.gameObject.SetActive(false);
                 GameState = EGameState.PlayScreen;
                 PlayerUI.gameObject.SetActive(true);
@@ -68,32 +77,37 @@ public class GameStateManager : MonoBehaviour
 
     private void PlayScreenState()
     {
-        //Check for when someone wins
+
+    }
+
+    private void WinScreenState()
+    {
+        if (CheckForStart())
+        {
+            JoinScreenUI.GetComponent<PlayerJoinUI>().ResetScreen();
+            PlayerManager.ClearPlayers();
+            MainMenuUI.gameObject.SetActive(true);
+            PlayerWinsUI.gameObject.SetActive(false);
+            GameState = EGameState.MainMenu;
+        }
     }
 
     private void CheckForPlayerJoin()
     {
-        if (_playerManager == null)
-        {
-            _playerManager = FindObjectOfType<PlayerManager>();
-            _playerManager.enabled = true;
-        }
-
         for (int i = 1; i <= 4; i++)
         {
             EController player = (EController) i;
             if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_A))
             {
-                _playerManager.AddPlayer(player);
+                PlayerManager.AddPlayer(player);
             }
 
             if (PlayerInput.Instance.GetButtonUp(player, EControllerButton.Button_B))
             {
-                _playerManager.RemovePlayer(player);
+                PlayerManager.RemovePlayer(player);
             }
         }
     }
-
 
     private bool CheckForStart()
     {
@@ -107,5 +121,19 @@ public class GameStateManager : MonoBehaviour
             }
         }
         return didStart;
+    }
+
+    private void OnPlayerCountEvent(PlayerCountEvent e)
+    {
+        if (e.PlayerCount <= 1)
+        {
+            PlayerWinsUI.gameObject.SetActive(true);
+
+            Text text = PlayerWinsUI.GetComponentInChildren<Text>();
+            text.text = "Player " + (int) PlayerManager.Players[0].controller + " Wins!";
+            text.color = PlayerManager.GetPlayerColor(PlayerManager.Players[0].controller);
+
+            GameState = EGameState.WinScreen;
+        }
     }
 }

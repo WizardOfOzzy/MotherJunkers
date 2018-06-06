@@ -58,6 +58,31 @@ public class PlayerJoinUI : MonoBehaviour
         }
     }
 
+    public void ResetScreen()
+    {
+        p1ready = false;
+        p2ready = false;
+        p3ready = false;
+        p4ready = false;
+
+        P1Join.gameObject.SetActive(true);
+        P1Back.gameObject.SetActive(false);
+
+        P2Join.gameObject.SetActive(true);
+        P2Back.gameObject.SetActive(false);
+
+        P3Join.gameObject.SetActive(true);
+        P3Back.gameObject.SetActive(false);
+
+        P4Join.gameObject.SetActive(true);
+        P4Back.gameObject.SetActive(false);
+
+        for (int i = 1; i <= 4; i++)
+        {
+            SetColor((EController) i, false);
+        }
+    }
+
     private void SetColor(EController controller, bool player)
     {
         int index = (int)controller - 1;

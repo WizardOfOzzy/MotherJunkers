@@ -48,9 +48,9 @@ public class PlayerUI : MonoBehaviour
         PlayerManager _playerManager = FindObjectOfType<PlayerManager>();
         if (_playerManager)
         {
-            for (int i = 0; i < _playerManager.Players.Count; i++)
+            for (int i = 0; i < PlayerManager.Players.Count; i++)
             {
-                if ((int) _playerManager.Players[i].controller == (int) PlayerIndex)
+                if ((int)PlayerManager.Players[i].controller == (int) PlayerIndex)
                 {
                     isEnable = true;
                     break;

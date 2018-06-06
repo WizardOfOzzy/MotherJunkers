@@ -10,10 +10,14 @@ public class ItemController : MonoBehaviour
         Pickup pickup = other.GetComponent<Pickup>();
 
         if (pickup != null)
-        {           
-            Item item = pickup.GetItem().GetComponent<Item>();
-            AddPickup(item);
-            pickup.Cleanup();
+        {
+            GameObject go = pickup.GetItem();
+            if (go != null)
+            {
+                Item item = go.GetComponent<Item>();
+                AddPickup(item);
+                pickup.Cleanup();
+            }
         }
     }
 

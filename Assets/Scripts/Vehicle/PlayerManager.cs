@@ -9,23 +9,32 @@ public class PlayerManager : MonoBehaviour
         public Color color;
     }
 
-    public List<PlayerTuple> Players = new List<PlayerTuple>();
+    public static List<PlayerTuple> Players = new List<PlayerTuple>();
 
-    public GameObject VehicleToSpawn;
-    private Vehicle[] vehicles;
+    private static  GameObject VehicleToSpawn;
+    private static Vehicle[] vehicles;
 
     private void Awake()
 	{
         Players = new List<PlayerTuple>();
         Publisher.Subscribe<KillVolumeHitEvent>(OnKillVolumeHitEvent);
+	    VehicleToSpawn = Resources.Load<GameObject>("Vehicles\\Vehicle");
 	}
 
-    public void ClearPlayers()
+    public static void ClearPlayers()
     {
+        for (int i = vehicles.Length - 1; i >= 0; i--)
+        {
+            if (vehicles[i] != null)
+            {
+                Destroy(vehicles[i].gameObject);
+            }
+        }
+       
         Players.Clear();
     }
 
-    public void AddPlayer(EController controller)
+    public static void AddPlayer(EController controller)
     {
         if (Players == null) return;
 
@@ -45,7 +54,7 @@ public class PlayerManager : MonoBehaviour
         Players.Add(tuple);
     }
 
-    public void RemovePlayer(EController controller)
+    public static void RemovePlayer(EController controller)
     {
         if (Players == null) return;
 
@@ -59,7 +68,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SpawnAllPlayers()
+    public static void SpawnAllPlayers()
     {
         VehicleSpawnLocation[] spawnLocs = FindObjectsOfType<VehicleSpawnLocation>();
         vehicles = new Vehicle[Players.Count];
@@ -87,7 +96,7 @@ public class PlayerManager : MonoBehaviour
         zoomCamera.Init(transforms);
     }
 
-    public void RespawnPlayer(Vehicle vehicle)
+    public static void RespawnPlayer(Vehicle vehicle)
     {
         Vector3 position = Random.insideUnitSphere * 20;
         position.y = 0.0f;
@@ -115,7 +124,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void OnKillVolumeHitEvent(KillVolumeHitEvent e)
+    private static void OnKillVolumeHitEvent(KillVolumeHitEvent e)
     {
         foreach (Vehicle v in vehicles)
         {
@@ -130,9 +139,10 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    e.Vehicle.gameObject.SetActive(false);
+                    RemovePlayer(v._controller);
+                    Destroy(e.Vehicle.gameObject);
+                    Publisher.Raise(new PlayerCountEvent(Players.Count));
                 }
-
                 break;
             }
         }

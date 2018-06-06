@@ -17,6 +17,11 @@ public class SmashCamera : MonoBehaviour
 
     public void Init(List<Transform> targets)
     {
+        if (Targets != null)
+        {
+            Targets.Clear();
+        }
+
         Targets = targets;
         Camera = GetComponent<Camera>();
     }
@@ -33,7 +38,7 @@ public class SmashCamera : MonoBehaviour
 
     private void Zoom()
     {
-        Bounds bounds = new Bounds(Targets[0].position, Vector3.zero);
+        Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
         for (int i = 0; i < Targets.Count; i++)
         {
             if (Targets[i] != null)
@@ -56,12 +61,14 @@ public class SmashCamera : MonoBehaviour
 
     private Vector3 GetCenterPoint()
     {
+        if (Targets.Count == 0) return Vector3.zero;
+
         if (Targets.Count == 1)
         {
             return Targets[0].transform.position;
         }
 
-        Bounds bounds = new Bounds(Targets[0].position, Vector3.zero);
+        Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
 
         for (int i = 0; i < Targets.Count; i++)
         {

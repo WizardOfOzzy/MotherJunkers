@@ -1,6 +1,5 @@
 ﻿public abstract class PublisherEvent
 {
-
 }
 
 public abstract class WeaponEvent : PublisherEvent
@@ -8,7 +7,7 @@ public abstract class WeaponEvent : PublisherEvent
     public EController PlayerIndex;
     public Weapon Weapon;
 
-    public WeaponEvent(EController playerIndex, Weapon weapon)
+    protected WeaponEvent(EController playerIndex, Weapon weapon)
     {
         PlayerIndex = playerIndex;
         Weapon = weapon;
@@ -53,5 +52,15 @@ public class KillVolumeHitEvent : PublisherEvent
     {
         PlayerIndex = playerIndex;
         Vehicle = vehicle;
+    }
+}
+
+public class PlayerCountEvent : PublisherEvent
+{
+    public int PlayerCount;
+
+    public PlayerCountEvent(int count)
+    {
+        PlayerCount = count;
     }
 }
