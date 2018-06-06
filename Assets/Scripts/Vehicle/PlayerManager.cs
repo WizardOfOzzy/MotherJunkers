@@ -107,6 +107,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         vehicle.transform.position = position;
+        vehicle.GetComponent<VehicleHealth>().SetHealth(0);
     }
 
     public static Color GetPlayerColor(EController player)

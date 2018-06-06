@@ -32,6 +32,19 @@ public class VehicleHealth : MonoBehaviour
         }
     }
 
+    public void SetHealth(int health)
+    {
+        Health = health;
+        PlayerUI[] playerUis = FindObjectsOfType<PlayerUI>();
+        foreach (PlayerUI playerUi in playerUis)
+        {
+            if (playerUi.PlayerIndex == GetComponent<Vehicle>()._controller)
+            {
+                playerUi.HealthUI.SetHealth(health);
+                break;
+            }
+        }
+    }
 
 
 }
