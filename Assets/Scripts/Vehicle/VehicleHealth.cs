@@ -2,7 +2,7 @@
 
 public class VehicleHealth : MonoBehaviour
 {
-    public float Health = 0.0f;
+    public float Health;
     public int Stock = 3;
 
     private void Start()
@@ -31,5 +31,7 @@ public class VehicleHealth : MonoBehaviour
             }
         }
     }
+
+
 
 }

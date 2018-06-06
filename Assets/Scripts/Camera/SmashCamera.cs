@@ -40,7 +40,8 @@ public class SmashCamera : MonoBehaviour
                 bounds.Encapsulate(Targets[i].position);
         }
 
-        float fov = Mathf.Lerp(MaxFieldOfField, MinFieldOfField, bounds.size.x / FieldOfViewLimit);
+        float max = Mathf.Max(bounds.size.x, bounds.size.z);
+        float fov = Mathf.Lerp(MaxFieldOfField, MinFieldOfField, max / FieldOfViewLimit);
         Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, fov, Time.deltaTime);
     }
 

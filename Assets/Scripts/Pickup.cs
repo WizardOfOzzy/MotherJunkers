@@ -41,7 +41,7 @@ public class Pickup : MonoBehaviour
 
     public GameObject GetItem()
     {
-        return transform.GetChild(0).gameObject;
+        return transform.childCount > 0 ? transform.GetChild(0).gameObject : null;
     }
 
     private PickupType _pickupType;

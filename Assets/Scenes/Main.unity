@@ -6291,8 +6291,8 @@ MonoBehaviour:
   Offset: {x: 0, y: -75, z: 50}
   SmoothTime: 0.5
   MinFieldOfField: 30
-  MaxFieldOfField: 15
-  FieldOfViewLimit: 20
+  MaxFieldOfField: 5
+  FieldOfViewLimit: 30
 --- !u!114 &1678367419
 MonoBehaviour:
   m_ObjectHideFlags: 0
