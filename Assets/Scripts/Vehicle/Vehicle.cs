@@ -38,10 +38,11 @@ public class Vehicle : MonoBehaviour
 
     public void SetColor(Color pColor)
     {
-        foreach (SkinnedMeshRenderer mesh in Meshes)
-        {
-            mesh.material.color = pColor;
-        }
+        // CBO - have it set the specific material instead
+        //foreach (SkinnedMeshRenderer mesh in Meshes)
+        //{
+        //    mesh.material.color = pColor;
+        //}
     }
 
 	private void OnTriggerEnter(Collider other)
