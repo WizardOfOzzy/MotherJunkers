@@ -41,7 +41,7 @@ public class Vehicle : MonoBehaviour
     {
         foreach (SkinnedMeshRenderer mesh in Meshes)
         {
-            mesh.material = Materials[(int)controller];
+            mesh.material = Materials[(int)controller - 1];
         }
     }
 
