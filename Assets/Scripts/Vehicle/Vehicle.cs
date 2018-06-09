@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 [RequireComponent(typeof(VehicleMovement))]
@@ -9,6 +10,8 @@ public class Vehicle : MonoBehaviour
     public Material[] Materials;
 
     private VehicleMovement _movement;
+
+    private Color[] _colors;
 
     private void Start()
     {
@@ -39,17 +42,49 @@ public class Vehicle : MonoBehaviour
 
     public void SetColor(EController controller)
     {
+        Debug.Log("SetColor: " + controller);
+
         foreach (SkinnedMeshRenderer mesh in Meshes)
         {
             mesh.material = Materials[(int)controller - 1];
         }
+
+        _colors = new Color[Meshes.Length];
+
+        for (int i = 0; i < Meshes.Length; i++)
+        {
+            SkinnedMeshRenderer mesh = Meshes[i];
+            _colors[i] = mesh.material.GetColor("_Color");
+        }
     }
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Component other)
 	{
         if (other.gameObject.name == "KillVolume")
         {
             Publisher.Raise(new KillVolumeHitEvent(_controller, this));
         }
 	}
+
+    public void FlashPlayer()
+    {
+        StartCoroutine(IFlashPlayer());
+    }
+
+    private IEnumerator IFlashPlayer()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            for (int j = 0; j < Meshes.Length; j++)
+            {
+                SkinnedMeshRenderer mesh = Meshes[j];
+                Color gray = Color.gray;
+                gray.a = 0.1f;
+                mesh.material.SetColor("_Color", gray);
+                yield return new WaitForSeconds(0.1f);
+                mesh.material.SetColor("_Color", _colors[j]);
+            }
+        }
+    }
 }

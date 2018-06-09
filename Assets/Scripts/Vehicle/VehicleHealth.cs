@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class VehicleHealth : MonoBehaviour
 {
     public float Health;
     public int Stock = 3;
+    public bool Invulnerable;
 
     private void Start()
     {
@@ -46,5 +48,28 @@ public class VehicleHealth : MonoBehaviour
         }
     }
 
+    public void SetRespawnInvulnerability()
+    {
+        StartCoroutine(RespawnInvulnerability());
+    }
 
+    private IEnumerator RespawnInvulnerability()
+    {
+        Collider[] colliders = GetComponents<Collider>();
+
+        foreach (Collider c in colliders)
+        {
+            c.enabled = false;
+        }
+        Vehicle vehicle = GetComponent<Vehicle>();
+        Invulnerable = true;
+        vehicle.FlashPlayer();
+        yield return new WaitForSeconds(1.0f);
+        Invulnerable = false;
+
+        foreach (Collider c in colliders)
+        {
+            c.enabled = true;
+        }
+    }
 }

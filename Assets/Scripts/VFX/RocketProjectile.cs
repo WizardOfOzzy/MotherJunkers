@@ -1,11 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketProjectile : MonoBehaviour {
-    Rigidbody _rBody;
+public class RocketProjectile : MonoBehaviour
+{
+    private Rigidbody _rBody;
+
     // Use this for initialization
-    void Start () {
+    private void Start()
+    {
         _rBody = GetComponent<Rigidbody>();
         _rBody.velocity = Vector3.zero;
         _rBody.AddForce(transform.forward * 2500);
@@ -18,14 +20,17 @@ public class RocketProjectile : MonoBehaviour {
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<VehicleHealth>())
         {
-            other.GetComponent<VehicleHealth>().TakeDamage(10);
-            other.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
-        }
-        Destroy(this.gameObject);
-    }
+            VehicleHealth health = other.GetComponent<VehicleHealth>();
 
+            health.TakeDamage(10);
+            other.GetComponent<Rigidbody>().AddForce(transform.forward * (2000 + (health.Health * 20)));
+        }
+
+        Destroy(gameObject);
+    }
 }

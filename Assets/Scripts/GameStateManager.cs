@@ -125,7 +125,7 @@ public class GameStateManager : MonoBehaviour
 
     private void OnPlayerCountEvent(PlayerCountEvent e)
     {
-        if (e.PlayerCount <= 1)
+        if (e.PlayerCount == 1)
         {
             PlayerWinsUI.gameObject.SetActive(true);
 
